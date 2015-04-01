@@ -1,5 +1,2 @@
+#include "city.h"
 
-class City
-{
-
-}

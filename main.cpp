@@ -2,9 +2,8 @@
 
 int main()
 {
-	Vector *vec = new Vector;
-	vec->run();
-	delete vec;
-  hi	
+  Vector *vec = new Vector;
+  vec->run();
+  delete vec;	
 }
 
