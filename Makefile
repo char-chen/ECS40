@@ -1,6 +1,5 @@
 simulator.out: vector.o city.o main.o
-	g++ -g -ansi -Wall -o simulator.out vector.o city.o main.o
-
+	g++ -g -ansi -Wall -o simulator.out vector.o city.o main.oi
 vector.o: vector.cpp vector.h city.h
 	g++ -g -ansi -Wall -c vector.cpp
 
