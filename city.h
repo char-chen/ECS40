@@ -1,8 +1,11 @@
 #ifndef CITY_H
   #define CITY_H
 
+#include <cstdio>
+
 class City
 {
+public:
   double longitude;
   double latitude;
   char *name;
@@ -10,20 +13,16 @@ class City
   char *airport;
   double population;
 
-public:
+//public:
   City();
   ~City();
-  double getLong();
-  void setLong(double val);
-  double getLat();
-  void setLat(double val);
-  char* getName();
-  void setName(char *n);
-  char* getState();
-  void setState(char *s);
-  char* getAir();
-  void setAir(char *a);
-  double getPop();
-  void setPop(double val);   
+  void initialize();
+  int readCity(FILE *f); //returns 0 if end of file
+  void readAirport(char *str, char *state);
+  bool isEqual(City *c);
+  void copyLocation(City *c);
+  bool hasAirport();
+  void setAirport();
+  void deallocate();
 };
 #endif

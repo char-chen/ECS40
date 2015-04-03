@@ -6,11 +6,18 @@
 class Vector
 {
   City **cityArray;
-  int size;
-  int alloc;
+  int count; //number of cities
+  int size; //allocated size of cityArray
 public:
   Vector();
   ~Vector();
-  double getDistance(City c1, City c2);
+  void initialize();
+  void readCities();
+  void resize();
+  void readAirports();
+  void cleanCities();
+  void findAirport();
+  double calcDistance(City c1, City c2);
+  void deallocate();
 };
 #endif

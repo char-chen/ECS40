@@ -1,6 +1,5 @@
 #include <iostream>
 #include "vector.h"
-
 using namespace std;
 
 const int COMMAND_LENGTH = 80;
@@ -16,7 +15,10 @@ int main()
 
 void run(Vector *v)
 {
-  char input[COMMAND_LENGTH];
-  cout << "Please enter two airport abbreviations (XXX XXX = done): "; 
-  cin.getline(input, COMMAND_LENGTH);
+  v->initialize();
+  v->readCities();
+  v->readAirports();
+  //char input[COMMAND_LENGTH];
+  //cout << "Please enter two airport abbreviations (XXX XXX = done): "; 
+  //cin.getline(input, COMMAND_LENGTH);
 }

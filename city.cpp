@@ -1,70 +1,88 @@
+#include <iostream>
+#include <cstring>
+#include <cstdlib>
 #include "city.h"
 
 City::City()
 {
-
 }
 
 City::~City()
 {
-
 }
 
-double City::getLong()
+void City::initialize()
 {
-  return longitude;
+  longitude = -1;
+  latitude = -1;
+  population = -1;
+  name = NULL;
+  state = NULL;
+  airport = NULL;
 }
 
-void City::setLong(double val)
+int City::readCity(FILE *f)
 {
-  longitude = val;
+  char line[100];
+  if(fgets(line, 100, f))
+  {
+    char *token;
+    token = strtok(line, ",");
+    name = new char[strlen(token)+1];
+    strcpy(name, token);
+    token = strtok(NULL, ",");
+    state = new char[strlen(token)+1];
+    strcpy(state, token);
+    token = strtok(NULL, ",");
+    population = atoi(token);
+    return 1; 
+  }
+  else 
+    return 0; 
 }
 
-double City::getLat()
+void City::readAirport(char *line, char *s)
 {
-  return latitude;
+  airport = new char[4];
+  airport = strtok(line, " []");
+  latitude = atof(strtok(NULL, "  "));
+  longitude = atof(strtok(NULL, " "));
+  name = strtok(NULL, ",");
+  name[0] = '.'; //this and the next line is to remove the blank space
+  name = strtok(name, ".");
+  state = new char[strlen(s)+1];
+  strcpy(state, s);
 }
 
-void City::setLat(double val)
+bool City::isEqual(City *c)
 {
-  latitude = val;
+  if(strcmp(name, c->name)==0 )// && strcmp(state)
+  {
+    return true;
+  }
+    return false; 
 }
 
-char* City::getName()
+void City::copyLocation(City *c)
 {
-  return name;
+  latitude = c->latitude;
+  longitude = c->longitude;
+  airport = c->airport;
+  std::cout << latitude << " " << longitude <<" "<< name << " "<<airport<<"\n";
 }
 
-void setName(char *n)
+void City::deallocate()
 {
-
+  //delete [] name;
+  //delete [] state;
+  //delete this;
 }
 
-char* City::getState()
+bool City::hasAirport()
 {
-  return state;
-}
-
-void setState(char *s)
-{
-
-}
-
-char* City::getAir()
-{
-  return airport;
-}
-
-void setAir(char *a)
-{
-}
-
-double City::getPop()
-{
-  return population;
-}
-
-void setPop(double val)
-{
-
+  if(airport)
+  {
+    return true;
+  }
+    return false; 
 }
