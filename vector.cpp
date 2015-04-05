@@ -2,7 +2,6 @@
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
-#include <cmath>
 #include "vector.h"
 
 using namespace std;
@@ -52,6 +51,7 @@ void Vector::resize()
   for(int i = count; i < size; i++)
   {
     cityArrayTemp[i] = new City();
+    cityArrayTemp[i]->initialize();
   }
   delete [] cityArray;
   cityArray = cityArrayTemp;
@@ -59,33 +59,38 @@ void Vector::resize()
 
 void Vector::readAirports()
 {
-  
   FILE *airportFile = fopen("airportLL.txt", "r");
-  char line[100];
-  char *state;
-  fgets(line, 100, airportFile); //to skip the first line;
-  while(fgets(line, 100, airportFile)) 
+  char line[50];
+  char *state = NULL;
+  fgets(line, 50, airportFile); //to skip the first line;
+  while(fgets(line, 50, airportFile)) 
   {
     if(line[0] >= 'A' && line[0] <= 'Z')
     {
-      state = strtok(line, "\n");
-    }   
+      if(state)
+        delete state;
+      //copies line over except its new line character \n
+      int s = strlen(line)-1;
+      state = new char[s];
+      for(int i = 0; i < s; i++)
+      {
+        state[i] = line[i];
+      }
+      state[s-1] = '\0';
+    }
     if(line[0] == '[')
     {
-      //cout << state << endl;
       City *test = new City();
       test->initialize();
       test->readAirport(line, state);
       for(int i = 0 ; i < count ; i++)
       {
         if(test->isEqual(cityArray[i]))
-        {
-          cityArray[i]->copyLocation(test); 
-          //cout << cityArray[i]->airport << " "<< cityArray[i]->name << " "<<cityArray[i]->airport<<" "<<cityArray[i]->state<<endl;
+        {       
+          cityArray[i]->copyLocation(test);
         } 
       }
       test->deallocate();
-      delete test;
     } 
   }
 }
@@ -94,19 +99,48 @@ void Vector::cleanCities()
 {
   for(int i = 0; i < count; i++)
   {
-    if(cityArray[i]->hasAirport())
+    if(!cityArray[i]->hasAirport())
     {
-      cout << "p";
-      //cout << cityArray[i]->name << " " << cityArray[i]->airport << endl;
+      cityArray[i]->deallocate();
     }
   }
 }
-double Vector::calcDistance(City c1, City c2)
+
+int Vector::findAirport(char *a)
 {
-  /*double lo1 = c1.getLong()*M_PI/180;
-  double lo2 = c2.getLong()*M_PI/180;
-  double la1 = c1.getLat()*M_PI/180;
-  double la2 = c2.getLat()*M_PI/180;
-  double r = 3963*/
-  return 0; //acos(sin(la1)*sin(la2)+cos(la1)*cos(la2)*cos(lo1-lo2))*r;
+  City *temp = new City();
+  if(strlen(a) != 3)
+  {
+    return -1;
+  } 
+  temp->setAirport(a);
+  for(int i = 0; i < count ; i++)
+  {
+    if(temp->isEqual(cityArray[i]))
+    {
+      return i;
+    } 
+  }
+  temp->deallocate();
+  return -1;
+}
+
+int Vector::calcDistance(int ind1, int ind2)
+{
+  return cityArray[ind1]->calcDistance(cityArray[ind2]);
+}
+
+int Vector::calcPassengers(int ind1, int ind2)
+{
+  return cityArray[ind1]->calcPassengers(cityArray[ind2]);
+}
+
+char *Vector::getCity(int i)
+{
+  return cityArray[i]->getCity();
+}
+
+void Vector::deallocate()
+{
+  delete this;
 }

@@ -487,7 +487,6 @@ Illinois
 [RFD]  42.20   89.10  Rockford,IL
 [SLO]  38.63   88.96  Salem,IL
 [BLV]  38.55   89.85  Scott AFB,IL
-[SPI]  39.85   89.67  Springfield,IL
 [SQI]  41.74   89.67  Sterling,IL
 [TAZ]  39.53   89.33  Taylorville,IL
 [VLA]  38.99   89.17  Vandalia,IL
@@ -723,7 +722,6 @@ Mississippi
 
 Missouri
 
-[COU]  38.82   92.22  Columbia,MO
 [CGI]  37.23   89.58  Cp Girardeau,MO
 [TBN]  37.75   92.13  Ft Leonard,MO
 [JEF]  38.60   92.17  Jefferson City,MO
@@ -998,7 +996,6 @@ Oklahoma
 Oregon
 
 [AST]  46.15  123.88  Astoria,OR
-[3S2]  45.25  122.75  Aurora,OR
 [BKE]  44.83  117.82  Baker,OR
 [4BK]  42.08  124.47  Brookings,OR
 [BNO]  43.60  118.95  Burns Arpt,OR
@@ -1271,7 +1268,6 @@ West Virginia
 
 [BKW]  37.78   81.12  Beckley,WV
 [BLF]  37.30   81.22  Bluefield,WV
-[CRW]  38.37   81.60  Charleston,WV
 [CKB]  39.28   80.23  Clarksburg,WV
 [EKN]  38.88   79.85  Elkins,WV
 [HTS]  38.37   82.55  Huntington,WV
