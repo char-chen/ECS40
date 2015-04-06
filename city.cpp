@@ -35,7 +35,7 @@ int City::readCity(FILE *f)
     state = new char[strlen(token)+1];
     strcpy(state, token);
     token = strtok(NULL, ",");
-    population = atoi(token);
+    population = atof(token);
     return 1; 
   }
   else 
@@ -46,7 +46,7 @@ void City::readAirport(char *line, char *s)
 {
   airport = new char[4];
   airport = strtok(line, " []");  
-  latitude = atof(strtok(NULL, "  "));
+  latitude = atof(strtok(NULL, " "));
   longitude = atof(strtok(NULL, " "));
   name = strtok(NULL, ",");
   name[0] = '.'; //this and the next line is for removing blank space
