@@ -13,12 +13,12 @@ int main()
   cities->initialize();
   cities->readCities();
   cities->readAirports();
-  //cities->cleanCities();
+  cities->cleanCities();
   for(int i = 0; i < cities->size ; i++)
   {
     //cout << cities->cityArray[i]->name <<" "<< cities->cityArray[i]->state;
   }
-  //run(cities);
+  run(cities);
   cities->deallocate();	
 }
 
@@ -28,7 +28,7 @@ void run(Vector *v)
   while(!done)
   {
     char input[COMMAND_LENGTH];
-    cout << "Please enter two airport abbreviations (XXX XXX = done): "; 
+    cout << "\nPlease enter two airport abbreviations (XXX XXX = done): "; 
     cin.getline(input, COMMAND_LENGTH);
     if(strcmp(input, "XXX XXX") != 0)
     {
@@ -40,12 +40,12 @@ void run(Vector *v)
       int a2ind = v->findAirport(a2); //airport 2 index
       if(a1ind == -1)
       {
-        cout << a1 << " is not a valid airport" << endl;
+        cout << a1 << " is not a valid airport." << endl;
         valid = false;
       }
       if(a2ind == -1)
       {
-        cout << a2 << " is not a valid airport" << endl;
+        cout << a2 << " is not a valid airport." << endl;
         valid = false;
       }
       if(valid)

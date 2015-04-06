@@ -70,13 +70,8 @@ void Vector::readAirports()
       if(state)
         delete state;
       //copies line over except its new line character \n
-      int s = strlen(line)-1;
-      state = new char[s];
-      for(int i = 0; i < s; i++)
-      {
-        state[i] = line[i];
-      }
-      state[s-1] = '\0';
+      state = new char[strlen(line)];
+      strcpy(state, strtok(line, "\n"));
     }
     if(line[0] == '[')
     {
