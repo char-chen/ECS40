@@ -6,21 +6,19 @@
 class Vector
 {
 public:
-  City **cityArray;
+  City *cityArray;
   int count; //number of cities
   int size; //allocated size of cityArray
 //public:
-  Vector();
-  ~Vector();
+  //Vector();
+  //~Vector();
   void initialize();
   void readCities();
   void resize();
   void readAirports();
   void cleanCities();
   int findAirport(char *airport);
-  int calcDistance(int ind1, int ind2);
-  int calcPassengers(int ind1, int ind2);
-  char* getCity(int index);
+  void calcDistance(int ind1, int ind2) const;
   void deallocate();
-};
+}; //class Vector
 #endif

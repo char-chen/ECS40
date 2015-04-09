@@ -160,14 +160,11 @@ Arkansas
 [BYH]  35.97   89.95  Blytheville,AR
 [CDH]  33.52   92.40  Camden,AR
 [ELD]  33.22   92.80  El Dorado,AR
-[FYV]  36.00   94.17  Fayetteville,AR
 [FSM]  35.33   94.37  Ft Smith,AR
 [HRO]  36.27   93.15  Harrison,AR
 [HOT]  34.48   93.10  Hot Springs,AR
 [JBR]  35.83   90.65  Jonesboro,AR
 [LIT]  35.22   92.38  Little Rock,AR
-[LRF]  34.92   92.15  Little Rock,AR
-[LZK]  34.83   92.25  Little Rock,AR
 [PBF]  34.17   91.93  Pine Bluff,AR
 [ASG]  36.18   94.13  Springdale,AR
 [TXK]  33.45   94.00  Texarkana,AR
@@ -400,7 +397,6 @@ Georgia
 [FTY]  33.78   84.52  Atlanta/Fltn,GA
 [AGS]  33.37   81.97  Augusta,GA
 [SSI]  31.15   81.38  Brunswick,GA
-[CSG]  32.52   84.93  Columbus,GA
 [MGE]  33.92   84.52  Dobbins AFB,GA
 [LSF]  32.33   85.00  Fort Benning,GA
 [LHW]  31.88   81.57  Ft Stewart,GA
@@ -485,7 +481,6 @@ Illinois
 [PIA]  40.67   89.68  Peoria,IL
 [UIN]  39.93   91.20  Quincy,IL
 [RFD]  42.20   89.10  Rockford,IL
-[SLO]  38.63   88.96  Salem,IL
 [BLV]  38.55   89.85  Scott AFB,IL
 [SQI]  41.74   89.67  Sterling,IL
 [TAZ]  39.53   89.33  Taylorville,IL
@@ -554,7 +549,6 @@ Kentucky
 [BWG]  36.97   86.43  Bowling Gren,KY
 [HOP]  36.67   87.50  Ft Campbell,KY
 [FTK]  37.90   85.97  Ft Knox,KY
-[JKL]  37.60   83.32  Jackson,KY
 [LEX]  38.05   85.00  Lexington,KY
 [LOZ]  37.08   84.07  London,KY
 [LOU]  38.23   85.67  Louisville,KY
@@ -564,7 +558,6 @@ Kentucky
 
 Louisiana
 
-[ESF]  31.38   92.30  Alexandria,LA
 [BAD]  32.50   93.67  Barksdale,LA
 [BTR]  30.53   91.15  Baton Rouge,LA
 [BVE]  29.55   89.67  Boothville,LA
@@ -592,7 +585,6 @@ Louisiana
 
 Maine
 
-[AUG]  44.32   69.80  Augusta,ME
 [BGR]  44.80   68.82  Bangor,ME
 [BHB]  44.45   68.37  Bar Harbor,ME
 [NHZ]  43.88   69.93  Brunswick,ME
@@ -655,7 +647,6 @@ Michigan
 [HTL]  44.37   84.68  Houghton Lake,MI
 [IMT]  45.82   88.12  Iron Mtn,MI
 [IWD]  46.53   90.13  Ironwood,MI
-[JXN]  42.27   84.47  Jackson,MI
 [AZO]  42.23   85.55  Kalamazoo,MI
 [LAN]  42.77   84.60  Lansing,MI
 [MBL]  44.27   86.25  Manistee,MI
@@ -676,7 +667,6 @@ Michigan
 Minnesota
 
 [AEL]  43.68   93.37  Albert Lea,MN
-[AXN]  45.87   95.38  Alexandria,MN
 [BJI]  47.50   94.93  Bemidji Muni,MN
 [BRD]  46.40   94.13  Brainerd-Crw,MN
 [DTL]  46.82   95.88  Detroit Laks,MN
@@ -684,7 +674,6 @@ Minnesota
 [ELO]  47.90   91.82  Ely,MN
 [FRM]  43.65   94.42  Fairmont,MN
 [FFM]  46.30   96.07  Fergus Falls,MN
-[GPZ]  47.22   93.52  Grand Rapids,MN
 [HIB]  47.38   92.85  Hibbing,MN
 [INL]  48.57   93.38  Intl Falls,MN
 [Y69]  45.13   94.52  Litchfield,MN
@@ -694,7 +683,6 @@ Minnesota
 [PKD]  46.90   95.07  Park Rapids,MN
 [P39]  46.60   94.32  Pequot Lake,MN
 [RWF]  44.55   95.08  Redwood Falls,MN
-[RST]  43.92   92.50  Rochester,MN
 [STP]  44.93   93.05  Saint Paul,MN
 [STC]  45.55   94.07  St Cloud,MN
 [TVF]  48.07   96.18  Thief River,MN
@@ -704,7 +692,6 @@ Minnesota
 
 Mississippi
 
-[CBM]  33.65   88.45  Columbus AFB,MS
 [GTR]  33.45   88.58  Golden Trian,MS
 [GLH]  33.48   90.98  Greenville,MS
 [GWO]  33.50   90.08  Greenwood,MS
@@ -777,7 +764,6 @@ Nebraska
 [BBW]  41.43   99.65  Broken Bow,NE
 [BUB]  41.78   99.15  Burwell,NE
 [CDR]  42.83  103.08  Chadron,NE
-[OLU]  41.45   97.35  Columbus,NE
 [CZD]  40.87  100.00  Cozad,NE
 [FNB]  40.07   95.58  Falls City,NE
 [GRI]  40.97   98.32  Grand Island,NE
@@ -787,7 +773,6 @@ Nebraska
 [LNK]  40.85   96.75  Lincoln,NE
 [MCK]  40.22  100.58  Mccook,NE
 [MHN]  42.05  101.05  Mullen,NE
-[OFK]  41.98   97.43  Norfolk,NE
 [OVN]  41.37   96.02  North Omaha,NE
 [LBF]  41.13  100.68  North Platte,NE
 [ONL]  42.47   98.68  O'neill,NE
@@ -800,7 +785,6 @@ Nebraska
 
 Nevada
 
-[AUI]  39.83  117.13  Austin,NV
 [BAM]  40.62  116.87  Battle Mtn,NV
 [P38]  37.62  114.52  Caliente,NV
 [EKO]  40.83  115.78  Elko,NV
@@ -862,7 +846,6 @@ New Mexico
 [HOB]  32.68  103.20  Hobbs,NM
 [HMN]  32.85  106.10  Holloman AFB,NM
 [LRU]  32.30  106.77  Las Cruces,NM
-[LVS]  35.65  105.15  Las Vegas,NM
 [LAM]  35.88  106.28  Los Alamos,NM
 [4MY]  34.98  106.05  Moriarity,NM
 [E28]  32.90  106.40  Northrup Str,NM
@@ -925,7 +908,6 @@ North Carolina
 [GSO]  36.08   79.95  Greensboro,NC
 [HKY]  35.75   81.38  Hickory,NC
 [HSS]  35.90   82.82  Hot Springs,NC
-[OAJ]  34.82   77.62  Jacksonville,NC
 [ISO]  35.32   77.63  Kinston,NC
 [HFF]  35.03   79.50  Mackall Aaf,NC
 [MQI]  35.92   75.68  Manteo Arpt,NC
@@ -960,7 +942,6 @@ Ohio
 [CVG]  39.05   84.67  Cincinnati,OH
 [CLE]  41.42   81.87  Cleveland,OH
 [CMH]  40.00   82.88  Columbus,OH
-[OSU]  40.08   83.07  Columbus Osu,OH
 [DAY]  39.90   84.20  Dayton,OH
 [FDY]  41.02   83.67  Findlay,OH
 [MFD]  40.82   82.52  Mansfield,OH
@@ -1011,7 +992,6 @@ Oregon
 [MFR]  42.37  122.87  Medford,OR
 [ONP]  44.63  124.05  Newport,OR
 [OTH]  43.42  124.25  North Bend,OR
-[ONO]  44.02  117.02  Ontario,OR
 [PDT]  45.68  118.85  Pendleton,OR
 [PDX]  45.60  122.60  Portland,OR
 [RDM]  44.27  121.15  Redmond,OR
@@ -1033,7 +1013,6 @@ Pennsylvania
 [FKL]  41.38   79.87  Franklin,PA
 [HAR]  40.37   77.42  Harrisburg,PA
 [JST]  40.32   78.83  Johnstown,PA
-[LNS]  40.13   76.30  Lancaster,PA
 [LBE]  40.28   79.40  Latrobe,PA
 [MDT]  40.20   76.77  Middletown,PA
 [MUI]  40.43   76.57  Muir,PA
@@ -1095,7 +1074,6 @@ Tennessee
 [CKV]  36.62   87.42  Clarksville,TN
 [CSV]  35.95   85.08  Crossville,TN
 [DYR]  36.02   89.40  Dyersburg,TN
-[MKL]  35.60   88.92  Jackson,TN
 [TYS]  35.82   83.98  Knoxville,TN
 [MEM]  35.05   90.00  Memphis,TN
 [NQA]  35.35   89.87  Memphis NAS,TN
@@ -1258,7 +1236,6 @@ Washington
 [SFF]  47.67  117.33  Spokane,WA
 [SMP]  47.28  121.33  Stampede Pas,WA
 [TIW]  47.27  122.58  Tacoma,WA
-[TDO]  46.48  122.80  Toledo,WA
 [ALW]  46.10  118.28  Walla Walla,WA
 [EAT]  47.40  120.20  Wenatchee,WA
 [NUW]  48.35  122.65  Whidbey Is,WA
@@ -1306,7 +1283,6 @@ Wyoming
 [4DG]  42.75  105.38  Douglas,WY
 [EVW]  41.33  111.00  Evanston,WY
 [GCC]  44.35  105.53  Gillette,WY
-[JAC]  43.60  110.73  Jackson,WY
 [LND]  42.82  108.73  Lander,WY
 [LAR]  41.32  105.68  Laramie,WY
 [4MC]  44.35  104.81  Moorcroft,WY

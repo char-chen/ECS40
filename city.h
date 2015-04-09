@@ -8,23 +8,21 @@ class City
 public:
   double longitude;
   double latitude;
-  char *name;
-  char *state;
-  char *airport;
+  char* name;
+  char* state;
+  char* airport;
   double population;
 //public:
-  City();
-  ~City();
+  //City();
+  //~City();
   void initialize();
-  int readCity(FILE *f); //returns 0 if end of file
-  void readAirport(char *str, char *state);
+  int readCty(FILE *f); //returns 0 if end of file
+  void readAirport(char *str, char *s); //s = is STATE 
   bool isEqual(const City *c);
   void copyLocation(const City *c);
   bool hasAirport();
-  void setAirport(char *airport);
-  int calcDistance(const City *c);
-  int calcPassengers(const City *c);
-  char* getCity();
+  void setAirport(const char *a); //a = AIRPORT
+  void calcDistance(const City *c);
   void deallocate();
-};
+}; //class City
 #endif

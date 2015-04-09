@@ -9,55 +9,47 @@ void run(Vector *v);
 
 int main()
 {
-  Vector *cities = new Vector();
-  cities->initialize();
-  cities->readCities();
-  cities->readAirports();
-  cities->cleanCities();
-  for(int i = 0; i < cities->size ; i++)
-  {
-    //cout << cities->cityArray[i]->name <<" "<< cities->cityArray[i]->state;
-  }
-  run(cities);
-  cities->deallocate();	
-}
+  Vector cities;
+  cities.initialize();
+  cities.readCities();
+  cities.readAirports();
+  cities.cleanCities();
+  run(&cities);
+  cities.deallocate();
+} //main
 
 void run(Vector *v)
 {
-  bool done = false;
-  while(!done)
+  while(true)
   {
     char input[COMMAND_LENGTH];
     cout << "\nPlease enter two airport abbreviations (XXX XXX = done): "; 
     cin.getline(input, COMMAND_LENGTH);
-    if(strcmp(input, "XXX XXX") != 0)
+    
+    if (strcmp(input, "XXX XXX") != 0)
     {
-      char *a1, *a2;
-      a1 = strtok(input, " ");
-      a2 = strtok(NULL, " ");
-      bool valid = true;
-      int a1ind = v->findAirport(a1); //airport 1 index
-      int a2ind = v->findAirport(a2); //airport 2 index
-      if(a1ind == -1)
+      bool valid = true; char *a1, *a2;
+      a1 = strtok(input, " "); a2 = strtok(NULL, "");
+      int a1ind = v->findAirport(a1); int a2ind = v->findAirport(a2); 
+      
+      if (a1ind == -1)
       {
-        cout << a1 << " is not a valid airport." << endl;
-        valid = false;
-      }
-      if(a2ind == -1)
+        cout << a1 << " is not a valid airport." << endl; valid = false;
+      } //if first is valid
+
+      if (a2ind == -1)
       {
-        cout << a2 << " is not a valid airport." << endl;
-        valid = false;
-      }
-      if(valid)
+        cout << a2 << " is not a valid airport." << endl; valid = false;
+      } //if second is valid
+
+      if (valid)
       {
-        cout << v->calcPassengers(a1ind, a2ind) << " passengers fly the " 
-          << v->calcDistance(a1ind, a2ind) << " miles from" << endl;
-        cout << v->getCity(a1ind) << " to " << v->getCity(a2ind) << "." << endl;  
-      }
-    } 
-    else
+        v->calcDistance(a1ind, a2ind);
+      } //prints result
+    } //program continues
+    else //exits
     {
-      done = true;
-    }
-  }
-}
+      break;
+    } //set done
+  } //prompting user 
+} //gets user input

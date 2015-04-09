@@ -11,4 +11,4 @@ main.o: main.cpp vector.h
 	g++ -g -ansi -Wall -c main.cpp
 
 clean: 
-	rm -f simulator.out *.o core
+	rm -f simulator.out *.o core makeOutput out*.txt *Results.txt addresses 
