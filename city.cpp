@@ -13,7 +13,7 @@ void City::initialize()
   population = -1;
   name = NULL;
   state = NULL;
-  airport = NULL;
+  strcpy(airport, "XXX");
 } //initialize
 
 int City::readCty(FILE *f)
@@ -39,7 +39,7 @@ int City::readCty(FILE *f)
 
 void City::readAirport(char *line, char *s)
 {
-  airport = strtok(line, " []");  
+  strcpy(airport, strtok(line, " []"));  
   latitude = atof(strtok(NULL, " "));
   longitude = atof(strtok(NULL, " "));
   name = strtok(NULL, ",");
@@ -51,7 +51,7 @@ void City::readAirport(char *line, char *s)
 
 bool City::isEqual(const City *c)
 {
-  if (!c->airport)
+  if (strcmp(c->airport, "XXX") == 0)
   {
     if (strcmp(name, c->name) == 0 && strcmp(state, c->state) == 0)
     {
@@ -75,27 +75,21 @@ void City::copyLocation(const City *c)
 {
   latitude = c->latitude;
   longitude = c->longitude;
-
-  if (c->airport)
-  {
-    airport = new char[4];
-    strcpy(airport, c->airport);
-  } //if airport set
+  strcpy(airport, c->airport);
 } //copyLocation
 
 bool City::hasAirport()
 {
-  if (airport)
+  if (strcmp(airport, "XXX") != 0)
   {
     return true;
-  } //if airport NULL
+  } //if airport not set
 
     return false; 
 } //hasAirport
 
 void City::setAirport(const char *a)
 {
-  airport = new char[4];
   strcpy(airport, a);
 } //setAirport
 

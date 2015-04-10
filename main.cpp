@@ -14,6 +14,10 @@ int main()
   cities.readCities();
   cities.readAirports();
   cities.cleanCities();
+  for (int i = 0; i < cities.count; i++)
+  {
+    //cout<<cities.cityArray[i].name<<" "<<cities.cityArray[i].airport<<endl;
+  }
   run(&cities);
   cities.deallocate();
 } //main
@@ -28,9 +32,11 @@ void run(Vector *v)
     
     if (strcmp(input, "XXX XXX") != 0)
     {
-      bool valid = true; char *a1, *a2;
+      bool valid = true; 
+      char *a1, *a2;
       a1 = strtok(input, " "); a2 = strtok(NULL, "");
-      int a1ind = v->findAirport(a1); int a2ind = v->findAirport(a2); 
+      int a1ind = v->findAirport(a1); 
+      int a2ind = v->findAirport(a2); 
       
       if (a1ind == -1)
       {

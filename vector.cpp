@@ -43,14 +43,14 @@ void Vector::resize()
   for (int i = 0; i < count; i++)
   {
     cityArrayTemp[i] = cityArray[i];
-    //cityArray[i].deallocate();
   } //upper half of cityArray
 
   for (int i = count; i < size; i++)
   {
     cityArrayTemp[i].initialize();
   } //lower half of cityArray
-  
+
+  delete [] cityArray; 
   cityArray = cityArrayTemp;
 } //resize
 
@@ -77,7 +77,7 @@ void Vector::readAirports()
       City test;
       test.initialize();
       test.readAirport(line, state);
-
+      
       for (int i = 0 ; i < count ; i++)
       {
         if (test.isEqual(&cityArray[i]))
@@ -122,6 +122,7 @@ int Vector::findAirport(char *a)
   } //size must be 3 to be valid 
 
   City temp;
+  temp.initialize();
   temp.setAirport(a);
   
   for (int i = 0; i < count-1 ; i++)
