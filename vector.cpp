@@ -110,7 +110,7 @@ void Vector::cleanCities()
   count = t;
 } //cleanCities
 
-int Vector::findAirport(char *a)
+int Vector::findAirport(const char *a) const
 {
   if (strlen(a) != 3)
   {

@@ -43,13 +43,13 @@ void City::readAirport(char *line, char *s)
   latitude = atof(strtok(NULL, " "));
   longitude = atof(strtok(NULL, " "));
   name = strtok(NULL, ",");
-  name[0] = '$'; //this and the next line is for removing blank space
+  name[0] = '$'; //for removing leading space character
   name = strtok(name, "$");
   state = new char[strlen(s) + 1];
   strcpy(state, s);
 } //readAirport
 
-bool City::isEqual(const City *c)
+bool City::isEqual(const City *c) const
 {
   if (strcmp(c->airport, "XXX") == 0)
   {
@@ -93,7 +93,7 @@ void City::setAirport(const char *a)
   strcpy(airport, a);
 } //setAirport
 
-void City::calcDistance(const City *c)
+void City::calcDistance(const City *c) const
 {
   double lo1 = longitude * M_PI / 180;
   double lo2 = c->longitude * M_PI / 180;

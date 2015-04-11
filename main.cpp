@@ -15,7 +15,7 @@ int main()
   cities.readAirports();
   cities.cleanCities();
   run(&cities);
-  //cities.deallocate();
+  cities.deallocate();
 } //main
 
 void run(Vector *v)

@@ -177,7 +177,6 @@ California
 [ACV]  40.98  124.10  Arcata,CA
 [BFL]  35.43  119.05  Bakersfield,CA
 [BAB]  39.13  121.45  Beale AFB,CA
-[BUO]  33.93  116.95  Beaumont,CA
 [BYS]  35.28  116.62  Bicycle Lk,CA
 [L35]  34.27  116.68  Big Bear Apt,CA
 [BIH]  37.60  118.60  Bishop,CA
@@ -286,7 +285,6 @@ California
 Colorado
 
 [AFF]  39.52  105.35  Air Force A,CO
-[AKO]  40.17  103.22  Akron,CO
 [ALS]  37.45  105.87  Alamosa,CO
 [ASE]  39.22  106.87  Aspen,CO
 [BJC]  39.90  105.12  Brmfield/Jef,CO
@@ -592,7 +590,6 @@ Maine
 [3B1]  45.45   69.55  Greenville,ME
 [HUL]  46.13   67.78  Houlton,ME
 [LIZ]  46.95   67.88  Loring AFB,ME
-[PWM]  43.65   70.32  Portland,ME
 [PQI]  46.68   68.05  Presque Isle,ME
 [RKD]  44.07   69.12  Rockland,ME
 [RUM]  44.88   70.88  Rumford,ME
@@ -807,7 +804,6 @@ Nevada
 New Hampshire
 
 [BML]  44.58   71.18  Berlin,NH
-[CON]  43.20   71.50  Concord,NH
 [AFN]  42.80   72.00  Jaffrey,NH
 [EEN]  42.90   72.27  Keene,NH
 [LCI]  43.57   71.43  Laconia,NH
@@ -822,7 +818,6 @@ New Jersey
 
 [ACY]  39.45   74.57  Atlantic Cty,NJ
 [N78]  40.28   74.28  Barnegat Ls,NJ
-[CDW]  40.87   74.28  Fairfield,NJ
 [NEL]  40.03   74.35  Lakehurst,NJ
 [WRI]  40.02   74.60  Mcguire AFB,NJ
 [MIV]  39.37   75.07  Millville,NJ
@@ -837,7 +832,6 @@ New Mexico
 [CVS]  34.38  103.32  Cannon,NM
 [CNM]  32.33  104.27  Carlsbad,NM
 [CAO]  36.45  103.15  Clayton Arpt,NM
-[4CR]  34.10  105.68  Corona,NM
 [4SL]  36.02  106.95  Cuba Awrs,NM
 [DMN]  32.25  107.70  Deming,NM
 [FMN]  36.75  108.23  Farmington,NM
@@ -902,7 +896,6 @@ North Carolina
 [NKT]  34.90   76.88  Cherry Point,NC
 [2DP]  36.13   76.50  Dare Co Gr,NC
 [44W]  35.25   75.50  Diamond Sho,NC
-[ECG]  36.27   76.18  Elizabeth,NC
 [FAY]  35.00   78.88  Fayetteville,NC
 [FBG]  35.13   78.93  Fort Bragg,NC
 [GSO]  36.08   79.95  Greensboro,NC
