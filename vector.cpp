@@ -93,25 +93,21 @@ void Vector::readAirports()
 
 void Vector::cleanCities()
 {
+  City *cityArrayTemp = new City[count];
+  int t = 0; //size of temp array
+ 
   for (int i = 0; i < count; i++)
   {
-    if (!cityArray[i].hasAirport())
+    if (cityArray[i].hasAirport())
     {
-      cityArray[i].deallocate();
-
-      for (int j = count-1; j > i; j--)
-      {
-        if (cityArray[j].hasAirport())
-        {
-          //cout << cityArray[i].name << cityArray[i].state <<endl;
-          cityArray[i] = cityArray[j];
-          //cityArray[j].deallocate();
-          count--;
-          break;
-        } //has airport
-      } //searching for replacement, from last
-    } //delete if airport = NULL
+      cityArrayTemp[t] = cityArray[i];
+      t++;
+    } //copy to new array for city with airport
   } //for each element in cityArray
+
+  delete [] cityArray;
+  cityArray = cityArrayTemp;
+  count = t;
 } //cleanCities
 
 int Vector::findAirport(char *a)
@@ -125,7 +121,7 @@ int Vector::findAirport(char *a)
   temp.initialize();
   temp.setAirport(a);
   
-  for (int i = 0; i < count-1 ; i++)
+  for (int i = 0; i < count ; i++)
   {
     if (temp.isEqual(&cityArray[i]))
     {
@@ -145,9 +141,9 @@ void Vector::calcDistance(int ind1, int ind2) const
 
 void Vector::deallocate()
 {
-  for (int i = 0; i < size; i++)
+  for (int i = 0; i < count-1; i++)
   {
-    //cityArray[i].deallocate();
+    cityArray[i].deallocate();
   } //for each element in cityArray
 
   delete [] cityArray;

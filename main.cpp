@@ -14,12 +14,8 @@ int main()
   cities.readCities();
   cities.readAirports();
   cities.cleanCities();
-  for (int i = 0; i < cities.count; i++)
-  {
-    //cout<<cities.cityArray[i].name<<" "<<cities.cityArray[i].airport<<endl;
-  }
   run(&cities);
-  cities.deallocate();
+  //cities.deallocate();
 } //main
 
 void run(Vector *v)

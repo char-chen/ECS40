@@ -43,8 +43,8 @@ void City::readAirport(char *line, char *s)
   latitude = atof(strtok(NULL, " "));
   longitude = atof(strtok(NULL, " "));
   name = strtok(NULL, ",");
-  name[0] = '.'; //this and the next line is for removing blank space
-  name = strtok(name, ".");
+  name[0] = '$'; //this and the next line is for removing blank space
+  name = strtok(name, "$");
   state = new char[strlen(s) + 1];
   strcpy(state, s);
 } //readAirport
