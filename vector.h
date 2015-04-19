@@ -5,11 +5,10 @@
 
 class Vector
 {
-public:
   City *cityArray;
   int count; //number of cities
   int size; //allocated size of cityArray
-//public:
+public:
   //Vector();
   //~Vector();
   void initialize();

@@ -5,18 +5,17 @@
 
 class City
 {
-public:
   double longitude;
   double latitude;
   char* name;
   char* state;
   char airport[4];
   double population;
-//public:
+public:
   //City();
   //~City();
   void initialize();
-  int readCty(FILE *f); //returns 0 if end of file
+  int readCity(FILE *f); //returns 0 if end of file
   void readAirport(char *str, char *s); //s = STATE 
   bool isEqual(const City *c) const;
   void copyLocation(const City *c);

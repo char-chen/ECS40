@@ -16,7 +16,7 @@ void City::initialize()
   strcpy(airport, "XXX");
 } //initialize
 
-int City::readCty(FILE *f)
+int City::readCity(FILE *f)
 {
   char line[100];
   

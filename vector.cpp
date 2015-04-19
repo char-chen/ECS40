@@ -22,7 +22,7 @@ void Vector::readCities()
 {
   FILE *cityFile = fopen("citypopulations.csv", "r");
 
-  while(cityArray[count].readCty(cityFile))
+  while(cityArray[count].readCity(cityFile))
   {
     count++;
 
