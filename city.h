@@ -1,7 +1,9 @@
 #ifndef CITY_H
   #define CITY_H
 
-#include <cstdio>
+#include <fstream>
+
+using namespace std;
 
 class City
 {
@@ -12,16 +14,16 @@ class City
   char airport[4];
   double population;
 public:
-  //City();
-  //~City();
-  void initialize();
-  int readCity(FILE *f); //returns 0 if end of file
+  City();
+  ~City();
+  int readCity(ifstream &file); //returns 0 if end of file
   void readAirport(char *str, char *s); //s = STATE 
-  bool isEqual(const City *c) const;
-  void copyLocation(const City *c);
+  bool isEqual(const City *city) const;
+  void copyLocation(const City *city);
   bool hasAirport();
   void setAirport(const char *a); //a = AIRPORT
-  void calcDistance(const City *c) const;
-  void deallocate();
+  void calcDistance(const City *city) const;
+  int getPassengers(const City *city) const;
+  City& operator=(const City& rhs);
 }; //class City
 #endif

@@ -1,38 +1,33 @@
 #include <iostream>
-#include <cstdio>
+#include <fstream>
 #include <cstdlib>
 #include <cstring>
 #include "vector.h"
 
 using namespace std;
 
-void Vector::initialize()
+Vector::Vector()
 { 
   count = 0;
   size = 10;
-  cityArray = new City[size];
-
-  for (int i = 0; i < size; i++)
-  {
-    cityArray[i].initialize();
-  } //for each element in cityArray 
-} //initialize
+  cityArray = new City[size]; 
+} //Vector
 
 void Vector::readCities()
 {
-  FILE *cityFile = fopen("citypopulations.csv", "r");
+  ifstream cityFile("citypopulations.csv");
 
   while(cityArray[count].readCity(cityFile))
   {
     count++;
 
-    if (count >= size)
+    if (count == size)
     {
       resize();
     } //resize if reach size limit
   } //parsing lines from file
-
-  fclose(cityFile);        
+  
+  cityFile.close();     
 } //readCities
 
 void Vector::resize()
@@ -44,38 +39,32 @@ void Vector::resize()
   {
     cityArrayTemp[i] = cityArray[i];
   } //upper half of cityArray
-
-  for (int i = count; i < size; i++)
-  {
-    cityArrayTemp[i].initialize();
-  } //lower half of cityArray
-
+  
   delete [] cityArray; 
   cityArray = cityArrayTemp;
 } //resize
 
 void Vector::readAirports()
 {
-  FILE *airportFile = fopen("airportLL.txt", "r");
+  ifstream airportFile("airportLL.txt");
   char line[50];
   char *state = NULL;
-  fgets(line, 50, airportFile); //to skip the first line;
+  airportFile.getline(line, 50); //to skip the first line;
   
-  while(fgets(line, 50, airportFile)) 
+  while(airportFile.getline(line, 50)) 
   {
     if (line[0] >= 'A' && line[0] <= 'Z')
     {
       if (state)
         delete state;
-      //copies line over except its new line character \n
-      state = new char[strlen(line)];
-      strcpy(state, strtok(line, "\n"));
-    } //state line
 
+      state = new char[strlen(line) + 1];
+      strcpy(state, line);
+    } //state line
+    
     if (line[0] == '[')
     {
       City test;
-      test.initialize();
       test.readAirport(line, state);
       
       for (int i = 0 ; i < count ; i++)
@@ -85,10 +74,8 @@ void Vector::readAirports()
           cityArray[i].copyLocation(&test);
         } //check city
       } //for each element in cityArry
-
-      //test.deallocate();
     } //airport line
-  } //parsing each line in file
+  } //parsing each line in file 
 } //readAirports
 
 void Vector::cleanCities()
@@ -114,11 +101,11 @@ int Vector::findAirport(const char *a) const
 {
   if (strlen(a) != 3)
   {
+    cout << a << " is not a valid airport." << endl;
     return -1;
   } //size must be 3 to be valid 
 
   City temp;
-  temp.initialize();
   temp.setAirport(a);
   
   for (int i = 0; i < count ; i++)
@@ -127,10 +114,9 @@ int Vector::findAirport(const char *a) const
     {
       return i;
     } //check if equal
-    
-  } //for each element of cityArray
+  } //for each element in cityArray
  
-  temp.deallocate();
+  cout << a << " is not a valid airport." << endl;
   return -1;
 } //findAirport
 
@@ -139,12 +125,22 @@ void Vector::calcDistance(int ind1, int ind2) const
   cityArray[ind1].calcDistance(&cityArray[ind2]);
 } //calcDistance
 
-void Vector::deallocate()
+void Vector::calcAirportTraffic(int index) const
 {
-  for (int i = 0; i < count-1; i++)
+  int sumPassengers = 0;
+  if (index != -1)
   {
-    cityArray[i].deallocate();
-  } //for each element in cityArray
+    for (int i = 0; i < count; i++)
+    {
+      if (i != index)
+        sumPassengers += cityArray[i].getPassengers(&cityArray[index]); 
+    } //for each element in cityArray
+    
+    cout << endl << "Total passengers: " << sumPassengers << endl;  
+  } //valid index returned from Vector::findAirport() 
+} //calcAirportTraffic
 
+Vector::~Vector()
+{
   delete [] cityArray;
-} //deallocate
+} //~Vector

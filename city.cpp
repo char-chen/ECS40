@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include <cstring>
 #include <cstdlib>
 #include <cmath>
@@ -6,21 +7,22 @@
 
 using namespace std;
 
-void City::initialize()
+City::City()
 {
   longitude = -1;
   latitude = -1;
   population = -1;
   name = NULL;
   state = NULL;
-  strcpy(airport, "XXX");
-} //initialize
+  airport[0] = '\0';
+  //strcpy(airport, "XXX");
+} //City
 
-int City::readCity(FILE *f)
+int City::readCity(ifstream &inf)
 {
   char line[100];
   
-  if (fgets(line, 100, f))
+  if (inf.getline(line, 100))
   {
     char *token;
     token = strtok(line, ",");
@@ -42,33 +44,23 @@ void City::readAirport(char *line, char *s)
   strcpy(airport, strtok(line, " []"));  
   latitude = atof(strtok(NULL, " "));
   longitude = atof(strtok(NULL, " "));
-  name = strtok(NULL, ",");
-  name[0] = '$'; //for removing leading space character
-  name = strtok(name, "$");
+  char* tok = strtok(NULL, ",");
+  tok[0] = '$'; //for removing leading space character
+  name = new char[strlen(tok)];
+  strcpy(name, strtok(tok, "$"));
   state = new char[strlen(s) + 1];
   strcpy(state, s);
 } //readAirport
 
 bool City::isEqual(const City *c) const
 {
-  if (strcmp(c->airport, "XXX") == 0)
-  {
-    if (strcmp(name, c->name) == 0 && strcmp(state, c->state) == 0)
-    {
-      return true;
-    } //if same city
+  if (name && c->name)
+    return strcmp(name, c->name) == 0 && strcmp(state, c->state) == 0;
+  
+  if (airport[0] && c->airport[0])
+    return strcmp(airport, c->airport) == 0;
 
-      return false; 
-  } //if airport not set
-  else //if airport set 
-  {
-    if (strcmp(airport, c->airport) == 0)
-    {
-      return true;
-    } //if same airport
-
-      return false;
-  } //not same airport 
+  return false;
 } //isEqual
 
 void City::copyLocation(const City *c)
@@ -80,12 +72,7 @@ void City::copyLocation(const City *c)
 
 bool City::hasAirport()
 {
-  if (strcmp(airport, "XXX") != 0)
-  {
-    return true;
-  } //if airport not set
-
-    return false; 
+  return airport[0] != '\0'; 
 } //hasAirport
 
 void City::setAirport(const char *a)
@@ -105,22 +92,42 @@ void City::calcDistance(const City *c) const
   
   if (distance >= 100)
   {
-    passengers = (population * c->population) / 250000000;
+    passengers = (population * c->population) / 2500000000U;
   } //if distance >= 100, calc populatoin
   else //distance < 100
     passengers = 0;
   
   cout << passengers << " passengers fly the " << distance << " miles from\n"
-  << name << "," << state << " to " << c->name << "," << c->state << endl;
-  
+      << name << "," << state << " to " << c->name << "," << c->state << endl;  
 } //calcDistance
 
-void City::deallocate()
+int City::getPassengers(const City *c) const
+{
+  int passengers = (population * c->population) / 2500000000U;
+  cout << name << ", " << state << ": " << passengers << endl;
+  return passengers;
+}
+
+City::~City()
 {
   if (name)
     delete [] name;
-
+  
   if (state)
     delete [] state;
+
+} //~City
+
+City& City::operator=(const City& rhs)
+{
+  longitude = rhs.longitude;
+  latitude = rhs.latitude;
+  name = new char[strlen(rhs.name) + 1];
+  strcpy(name, rhs.name);
+  state = new char[strlen(rhs.state) + 1];
+  strcpy(state, rhs.state);
+  strcpy(airport, rhs.airport);
+  population = rhs.population;
   
-} //deallocate
+  return *this;
+} //Copy assignment operator
