@@ -122,7 +122,8 @@ int Vector::findAirport(const char *a) const
 
 void Vector::calcDistance(int ind1, int ind2) const
 {
-  cityArray[ind1].calcDistance(&cityArray[ind2]);
+  if (ind1 != -1 || ind2 != -1)
+    cityArray[ind1].calcDistance(&cityArray[ind2]);
 } //calcDistance
 
 void Vector::calcAirportTraffic(int index) const

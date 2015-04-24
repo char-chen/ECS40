@@ -15,7 +15,6 @@ City::City()
   name = NULL;
   state = NULL;
   airport[0] = '\0';
-  //strcpy(airport, "XXX");
 } //City
 
 int City::readCity(ifstream &inf)
@@ -91,9 +90,7 @@ void City::calcDistance(const City *c) const
   distance = acos(sin(la1) * sin(la2) + cos(la1) * cos(la2) * cos(lo1-lo2)) * r;
   
   if (distance >= 100)
-  {
     passengers = (population * c->population) / 2500000000U;
-  } //if distance >= 100, calc populatoin
   else //distance < 100
     passengers = 0;
   
@@ -103,6 +100,14 @@ void City::calcDistance(const City *c) const
 
 int City::getPassengers(const City *c) const
 {
+  double lo1 = longitude * M_PI / 180;
+  double lo2 = c->longitude * M_PI / 180;
+  double la1 = latitude * M_PI / 180;
+  double la2 = c->latitude * M_PI / 180;
+  double r = 3963;
+  int distance = acos(sin(la1) * sin(la2) + cos(la1) * cos(la2) * cos(lo1-lo2)) * r;
+  if (distance < 100)
+    return 0;
   int passengers = (population * c->population) / 2500000000U;
   cout << name << ", " << state << ": " << passengers << endl;
   return passengers;
@@ -128,6 +133,6 @@ City& City::operator=(const City& rhs)
   strcpy(state, rhs.state);
   strcpy(airport, rhs.airport);
   population = rhs.population;
-  
+   
   return *this;
 } //Copy assignment operator
