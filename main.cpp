@@ -22,6 +22,7 @@ void run(const Vector *v)
   {
     char a1[80]; char a2[80];
     int choice = getChoice();
+    
     if (choice == 1)
     {
       cout << "\nPlease enter two airport abbreviations (XXX XXX): "; 

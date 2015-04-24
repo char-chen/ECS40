@@ -105,13 +105,14 @@ int City::getPassengers(const City *c) const
   double la1 = latitude * M_PI / 180;
   double la2 = c->latitude * M_PI / 180;
   double r = 3963;
-  int distance = acos(sin(la1) * sin(la2) + cos(la1) * cos(la2) * cos(lo1-lo2)) * r;
-  if (distance < 100)
+  int dist = acos(sin(la1) * sin(la2) + cos(la1) * cos(la2) * cos(lo1-lo2)) * r;
+  
+  if (dist < 100)
     return 0;
   int passengers = (population * c->population) / 2500000000U;
   cout << name << ", " << state << ": " << passengers << endl;
   return passengers;
-}
+} //getPassengers
 
 City::~City()
 {
@@ -120,7 +121,6 @@ City::~City()
   
   if (state)
     delete [] state;
-
 } //~City
 
 City& City::operator=(const City& rhs)

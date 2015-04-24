@@ -129,6 +129,7 @@ void Vector::calcDistance(int ind1, int ind2) const
 void Vector::calcAirportTraffic(int index) const
 {
   int sumPassengers = 0;
+
   if (index != -1)
   {
     for (int i = 0; i < count; i++)
