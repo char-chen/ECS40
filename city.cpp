@@ -17,7 +17,7 @@ City::City()
   airport[0] = '\0';
 } //City
 
-int City::readCity(ifstream &inf)
+int City::readCity(ifstream& inf)
 {
   char line[100];
   

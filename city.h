@@ -16,7 +16,7 @@ class City
 public:
   City();
   ~City();
-  int readCity(ifstream &file); //returns 0 if end of file
+  int readCity(ifstream & file); //returns 0 if end of file
   void readAirport(char *str, char *s); //s = STATE 
   bool isEqual(const City *city) const;
   void copyLocation(const City *city);

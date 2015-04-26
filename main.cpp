@@ -20,7 +20,8 @@ void run(const Vector *v)
 {
   while(true)
   {
-    char a1[80]; char a2[80];
+    char a1[80]; 
+    char a2[80];
     int choice = getChoice();
     
     if (choice == 1)

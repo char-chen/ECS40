@@ -22,9 +22,7 @@ void Vector::readCities()
     count++;
 
     if (count == size)
-    {
       resize();
-    } //resize if reach size limit
   } //parsing lines from file
   
   cityFile.close();     
@@ -36,9 +34,7 @@ void Vector::resize()
   City *cityArrayTemp = new City[size];
 
   for (int i = 0; i < count; i++)
-  {
     cityArrayTemp[i] = cityArray[i];
-  } //upper half of cityArray
   
   delete [] cityArray; 
   cityArray = cityArrayTemp;
@@ -70,9 +66,7 @@ void Vector::readAirports()
       for (int i = 0 ; i < count ; i++)
       {
         if (test.isEqual(&cityArray[i]))
-        {       
           cityArray[i].copyLocation(&test);
-        } //check city
       } //for each element in cityArry
     } //airport line
   } //parsing each line in file 
@@ -111,9 +105,7 @@ int Vector::findAirport(const char *a) const
   for (int i = 0; i < count ; i++)
   {
     if (temp.isEqual(&cityArray[i]))
-    {
       return i;
-    } //check if equal
   } //for each element in cityArray
  
   cout << a << " is not a valid airport." << endl;
