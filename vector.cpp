@@ -114,7 +114,7 @@ int Vector::findAirport(const char *a) const
 
 void Vector::calcDistance(int ind1, int ind2) const
 {
-  if (ind1 != -1 || ind2 != -1)
+  if (ind1 != -1 && ind2 != -1)
     cityArray[ind1].calcDistance(&cityArray[ind2]);
 } //calcDistance
 
@@ -130,7 +130,7 @@ void Vector::calcAirportTraffic(int index) const
         sumPassengers += cityArray[i].getPassengers(&cityArray[index]); 
     } //for each element in cityArray
     
-    cout << endl << "Total passengers: " << sumPassengers << endl;  
+    cout << "Total passengers: " << sumPassengers << endl;  
   } //valid index returned from Vector::findAirport() 
 } //calcAirportTraffic
 

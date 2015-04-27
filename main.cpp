@@ -29,7 +29,9 @@ void run(const Vector *v)
       cout << "\nPlease enter two airport abbreviations (XXX XXX): "; 
       cin >> a1 >> a2;
       cin.ignore(1000, '\n');
-      v->calcDistance(v->findAirport(a1), v->findAirport(a2));
+      int a1index = v->findAirport(a1);
+      int a2index = v->findAirport(a2);
+      v->calcDistance(a1index, a2index);
     } //distance and passengers between two airports
     else //input = 2
       if (choice == 2)
@@ -45,7 +47,7 @@ void run(const Vector *v)
     else //done
       break;
   } //prompt continuously
-} //gets user input/and return results
+} //gets user input and return results
 
 int getChoice()
 {
@@ -54,13 +56,13 @@ int getChoice()
   cout << "0. Done.\n";
   cout << "1. Determine distance and passengers between two airports.\n";
   cout << "2. Determine all traffic from one airport.\n";
-  cout << endl << "Your choice (0 - 2): ";
+  cout << "\nYour choice (0 - 2): ";
   cin >> input;
   cin.ignore(10000, '\n');
 
   if (atoi(input) > 2 || atoi(input) < 0)
   {
-    cout << "Your choice must be between 0 and 2.  Please try again." << endl;
+    cout << "Your choice must be between 0 and 2. Please try again." << endl;
     return -1;
   } //check if valid range 
 
