@@ -135,7 +135,6 @@ City& City::operator=(const City& rhs)
   state = new char[strlen(rhs.state) + 1];
   strcpy(state, rhs.state);
   strcpy(airport, rhs.airport);
-  population = rhs.population;
-   
+  population = rhs.population;  
   return *this;
 } //Copy assignment operator
