@@ -3,7 +3,6 @@
 #include <cstdlib>
 #include <cstring>
 #include "vector.h"
-
 using namespace std;
 
 Vector::Vector()
@@ -20,7 +19,7 @@ void Vector::readCities()
   while(cityArray[count].readCity(cityFile))
   {
     count++;
-
+    
     if (count == size)
       resize();
   } //parsing lines from file
@@ -53,7 +52,7 @@ void Vector::readAirports()
     {
       if (state)
         delete state;
-
+        
       state = new char[strlen(line) + 1];
       strcpy(state, line);
     } //state line
@@ -120,17 +119,15 @@ void Vector::calcDistance(int ind1, int ind2) const
 
 void Vector::calcAirportTraffic(int index) const
 {
-  int sumPassengers = 0;
+  int total = 0;
 
   if (index != -1)
   {
     for (int i = 0; i < count; i++)
-    {
       if (i != index)
-        sumPassengers += cityArray[i].getPassengers(&cityArray[index]); 
-    } //for each element in cityArray
+        total += cityArray[i].getPassengers(&cityArray[index]); 
     
-    cout << "Total passengers: " << sumPassengers << endl;  
+    cout << "Total passengers: " << total << endl;  
   } //valid index returned from Vector::findAirport() 
 } //calcAirportTraffic
 

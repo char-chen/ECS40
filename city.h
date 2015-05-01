@@ -2,7 +2,6 @@
   #define CITY_H
 
 #include <fstream>
-
 using namespace std;
 
 class City

@@ -1,14 +1,17 @@
-simulator.out: vector.o city.o main.o
-	g++ -g -ansi -Wall -o simulator.out vector.o city.o main.o
+simulator.out: city.o main.o vector.o plane.o
+	g++ -Wall -ansi -lm -g -o simulator.out city.o main.o vector.o plane.o 
 
-vector.o: vector.cpp vector.h city.h
-	g++ -g -ansi -Wall -c vector.cpp
+city.o: city.cpp city.h 
+	g++ -Wall -ansi -g -c city.cpp
 
-city.o: city.cpp city.h
-	g++ -g -ansi -Wall -c city.cpp
+main.o: main.cpp vector.h 
+	g++ -Wall -ansi -g -c main.cpp
 
-main.o: main.cpp vector.h
-	g++ -g -ansi -Wall -c main.cpp
+vector.o: vector.cpp vector.h city.h 
+	g++ -Wall -ansi -g -c vector.cpp
 
-clean: 
-	rm -f simulator.out *.o core makeOutput out*.txt *Results.txt addresses temp* 
+plane.o: plane.cpp plane.h
+	g++ -Wall -ansi -g -c plane.cpp
+
+clean:
+	rm -f simulator.out city.o main.o vector.o plane.o 
