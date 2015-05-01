@@ -1,4 +1,5 @@
 #include <iostream>
+#include <iomanip>
 #include <fstream>
 #include <cstdlib>
 #include <cstring>
@@ -63,10 +64,8 @@ void Vector::readAirports()
       test.readAirport(line, state);
       
       for (int i = 0 ; i < count ; i++)
-      {
-        if (test.isEqual(&cityArray[i]))
-          cityArray[i].copyLocation(&test);
-      } //for each element in cityArry
+        if (test.isEqual(cityArray[i]))
+          cityArray[i].copyLocation(test);
     } //airport line
   } //parsing each line in file 
 } //readAirports
@@ -102,19 +101,39 @@ int Vector::findAirport(const char *a) const
   temp.setAirport(a);
   
   for (int i = 0; i < count ; i++)
-  {
-    if (temp.isEqual(&cityArray[i]))
+    if (temp.isEqual(cityArray[i]))
       return i;
-  } //for each element in cityArray
  
   cout << a << " is not a valid airport." << endl;
   return -1;
 } //findAirport
 
-void Vector::calcDistance(int ind1, int ind2) const
+void Vector::calcDistance(int ind1, int ind2, const Plane *p, int n) const
 {
   if (ind1 != -1 && ind2 != -1)
-    cityArray[ind1].calcDistance(&cityArray[ind2]);
+  {
+    if (p)
+    {
+      int dist = cityArray[ind1].getDistance(cityArray[ind2]);
+      int passengers = cityArray[ind1].getPassengers(cityArray[ind2], dist);
+      int trips = p[0].getTrips(passengers);
+      int lowestCost = p[0].getCost();
+      
+      for (int i = 1; i < n; i++)
+      {
+        if (p[i].getCost() < lowestCost)
+        {
+          lowestCost = p[i].getCost();
+          trips = p[i].getTrips(passengers);
+          
+        }
+      }
+      
+      cout << setw(11) << passengers << setw(7) << dist << setw(6) << trips << endl;
+    }
+    else //not plane option
+      cityArray[ind1].showDistance(cityArray[ind2]);
+  }
 } //calcDistance
 
 void Vector::calcAirportTraffic(int index) const
@@ -125,7 +144,7 @@ void Vector::calcAirportTraffic(int index) const
   {
     for (int i = 0; i < count; i++)
       if (i != index)
-        total += cityArray[i].getPassengers(&cityArray[index]); 
+        total += cityArray[i].showTraffic(cityArray[index]);
     
     cout << "Total passengers: " << total << endl;  
   } //valid index returned from Vector::findAirport() 

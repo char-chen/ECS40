@@ -16,13 +16,15 @@ public:
   City();
   ~City();
   int readCity(ifstream& file); //returns 0 if end of file
-  void readAirport(char *str, char *s); //s = STATE 
-  bool isEqual(const City *city) const;
-  void copyLocation(const City *city);
+  void readAirport(char *str, char *state);
+  bool isEqual(const City& city) const;
+  void copyLocation(const City& city);
   bool hasAirport();
-  void setAirport(const char *a); //a = AIRPORT
-  void calcDistance(const City *city) const;
-  int getPassengers(const City *city) const;
+  void setAirport(const char *airport);
+  int getDistance(const City& city) const;
+  int getPassengers(const City& city, int dist) const;
+  void showDistance(const City& city) const;
+  int showTraffic(const City& city) const;
   City& operator=(const City& rhs);
 }; //class City
 #endif

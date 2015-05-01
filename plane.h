@@ -14,7 +14,9 @@ class Plane
   int price;  //in US dollars
   static const double gallonPrice = 3.39;
 public:
-  void input();  
+  void input();
+  int getCost() const;
+  int getTrips(int totalPassengers) const;
   char* getName();
   friend ostream& operator<<(ostream& os, const Plane& rhs);
 };
