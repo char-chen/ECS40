@@ -8,12 +8,12 @@
 #include "plane.h"
 using namespace std;
 
-void run(const Vector *cities, const Plane *planes, int pCount);
+void run(const Vector *cities, Plane *planes, int& pCount);
 int getChoice();
 void calcDistance(const Vector *cities, char *a1, char *a2);
 void determineAirportTraffic(const Vector *cities, char *a1);
 void displayPlaneInformation(const Plane *planes, int count);
-void addPlaneInformation();
+void addPlaneInformation(Plane *planes, int &count);
 void determineBestPlane();
 
 int main()
@@ -23,7 +23,7 @@ int main()
   cities.readAirports();
   cities.cleanCities();
   
-  int pCount = 5;
+  int pCount = 6;
   Plane myPlanes[10];
   ifstream planeFile("planes.dat", ios::binary);
   planeFile.read((char*)myPlanes, sizeof(Plane)*pCount);  
@@ -38,7 +38,7 @@ int main()
   return 0;
 } //main
 
-void run(const Vector *cities, const Plane *planes, int c)
+void run(const Vector *cities, Plane *planes, int& c)
 {
   while(true)
   {
@@ -56,8 +56,8 @@ void run(const Vector *cities, const Plane *planes, int c)
         displayPlaneInformation(planes, c);
     else //input = 4
       if (choice == 4)
-        addPlaneInformation();
-    else
+        addPlaneInformation(planes, c);
+    else //input = 5
       if (choice == 5)
         determineBestPlane();
     else //input not valid
@@ -115,15 +115,16 @@ void displayPlaneInformation(const Plane *p, int count)
   cout << left << setw(12) << "Name" << setw(6) << "Pass." << setw(6) << "Range" 
        << setw(6) << "Speed" << setw(7) << "Fuel" << setw(6) << "MPG" << setw(6)
        << "$/mi" << setw(12) << "Price * 10^6" << endl;
-  locale mylocale("");
-  cout.imbue(mylocale); 
+  cout.imbue(locale("")); 
+
   for (int i = 0; i < count; i++)
     cout << p[i] << endl;
 }
 
-void addPlaneInformation()
+void addPlaneInformation(Plane *p, int& count)
 {
-  
+  p[count].input();
+  count++;
 }
 
 void determineBestPlane()
