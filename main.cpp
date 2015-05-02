@@ -8,6 +8,7 @@
 #include "plane.h"
 using namespace std;
 
+void readPlanes(Plane *planes, int &pCount);
 void run(const Vector& cities, Plane *planes, int& pCount);
 int getChoice();
 void calcDistance(const Vector& cities);
@@ -22,14 +23,21 @@ int main()
   cities.readCities();
   cities.readAirports();
   cities.cleanCities();
-  
-  int pCount = 0;
+   
+  int planeCount = 0;
   Plane myPlanes[10];
+  readPlanes(myPlanes, planeCount);
+  run(cities, myPlanes, planeCount);
+  return 0;
+} //main
+
+void readPlanes(Plane *planes, int &pCount)
+{
   ifstream planeFile("planes.dat", ios::binary);
   
   if (planeFile)
-  { 
-    for (Plane *p = myPlanes; !planeFile.eof(); p++)
+  {
+    for (Plane *p = planes; !planeFile.eof(); p++)
     {
       planeFile.read((char*)p, sizeof(Plane)); 
       pCount++;
@@ -38,10 +46,7 @@ int main()
     planeFile.close();
     pCount--;
   } //file exists
-
-  run(cities, myPlanes, pCount);
-  return 0;
-} //main
+} //readPlanes
 
 void run(const Vector& cities, Plane *planes, int& c)
 {
@@ -114,7 +119,7 @@ void determineAirportTraffic(const Vector& v)
   v.calcAirportTraffic(v.findAirport(airport));
 } //Display all traffic from airport
 
-void displayPlaneInformation(const Plane *p, int count)
+void displayPlaneInformation(const Plane *planes, int count)
 {
   cout << "\nPlane Information\n";
   cout << left << setw(12) << "Name" << setw(6) << "Pass." << setw(6) << "Range" 
@@ -123,7 +128,7 @@ void displayPlaneInformation(const Plane *p, int count)
   cout.imbue(locale("")); 
 
   for (int i = 0; i < count; i++)
-    cout << p[i] << endl;
+    cout << planes[i] << endl;
 } //Display information of all existing planes
 
 void addPlaneInformation(Plane *p, int& count)
@@ -141,5 +146,6 @@ void determineBestPlane(const Vector& v, const Plane *p, int count)
   int a2Index = v.findAirport(a2);
   cout << setw(11) << left << "Passengers" << setw(7) << "Miles" << setw(6) << "Trips"
        << setw(10) << "Name" << setw(7) << "Cost" << endl;
+  cout.imbue(locale("C"));
   v.calcDistance(a1Index, a2Index, p, count);
 } //Determine the best plane for a given route 
