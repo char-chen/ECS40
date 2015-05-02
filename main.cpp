@@ -25,15 +25,13 @@ int main()
   
   int pCount = 0;
   Plane myPlanes[10];
-  Plane *p = myPlanes;
   ifstream planeFile("planes.dat", ios::binary);
   
   if (planeFile)
   { 
-    while (!planeFile.eof())
+    for (Plane *p = myPlanes; !planeFile.eof(); p++)
     {
       planeFile.read((char*)p, sizeof(Plane)); 
-      p++;
       pCount++;
     } //parse lines
     

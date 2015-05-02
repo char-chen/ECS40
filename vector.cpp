@@ -127,7 +127,8 @@ void Vector::calcDistance(int ind1, int ind2, const Plane *pArr, int n) const
           lowestCost = cost;
           best = i; 
         } 
-      } 
+      } //
+       
       int t = pArr[best].getTrips((double)p);
       const char *name = pArr[best].getName();
       cout << setw(11) << p << setw(7) << d << setw(6) << t << setw(10) << name

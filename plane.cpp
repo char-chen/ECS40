@@ -34,20 +34,22 @@ int Plane::getCost(double p, double d) const
 {
   if (d <= range)
   {
-    double fuelCost = (double)fuel * Plane::gallonPrice / range * d;
-    double fSal = ceil(p / 100.0) * 30.0 * (2.0 + ceil(d / speed));
-    double pilotSal = 2 * 100 * (2 + ceil(d / speed));
-    double maintenance = 0.000025 * price * ceil(d / speed);
-    //cout << fuelCost<<" "<<ceil(d/speed)<<" "<<pilotSal<<" "<<maintenance<< endl;
-    return ceil(fuelCost + fSal + pilotSal + maintenance);
+    //cout << name << ceil(p / 100) << endl;
+    int trips = this->getTrips(p);
+    double hours = ceil(d / speed);
+    double fuelCost = d * (double)fuel / range * Plane::gallonPrice * trips;
+    double fSal = ceil(passengers / 100.0) * 30 * (2.0 + hours) * trips;
+    double pSal = 2 * 100 * (2 + hours) * trips;
+    double maintenance = 0.000025 * price * hours * trips;
+    return ceil(fuelCost + fSal + pSal + maintenance);
   } //satisfy range
   
   return -1;
 }
 
-int Plane::getTrips(double total) const
+int Plane::getTrips(double totalP) const
 {
-  return ceil(total/passengers);
+  return ceil(totalP/passengers);
 }
 
 const char* Plane::getName() const
