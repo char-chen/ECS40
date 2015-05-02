@@ -15,9 +15,9 @@ class Plane
   static const double gallonPrice = 3.39;
 public:
   void input();
-  int getCost() const;
-  int getTrips(int totalPassengers) const;
-  char* getName();
+  int getCost(double passengers, double distance) const;
+  int getTrips(double passengers) const;
+  const char* getName() const;
   friend ostream& operator<<(ostream& os, const Plane& rhs);
 };
 #endif

@@ -19,26 +19,38 @@ void Plane::input()
   cin >> speed;
   cout << "Price: ";
   cin >> price;
-  ofstream planeFile("planes.dat", ios::binary | ios::app);
+  ofstream planeFile("planes.dat");
+  
+  if (planeFile.good())
+    planeFile.open("planes.dat", ios::binary | ios::app);
+  else //file not exist
+    planeFile.open("planes.dat", ios::binary);
+
   planeFile.write((char*)this, sizeof(Plane));
   planeFile.close(); 
 } //input
 
-int Plane::getCost() const
+int Plane::getCost(double p, double d) const
 {
-  double fuelCost = (double)range/fuel;
-  double fSalaries = ceil((double)passengers / 100) * 30 * (2 + ceil((double)range / speed));
-  double pilotSalaries = 2*100*(2 + ceil((double)range/speed));
-  double maintenance = 0.000025 * price * ceil((double)range / speed);
-  return fuelCost + fSalaries + pilotSalaries + maintenance;
+  if (d <= range)
+  {
+    double fuelCost = (double)fuel * Plane::gallonPrice / range * d;
+    double fSal = ceil(p / 100.0) * 30.0 * (2.0 + ceil(d / speed));
+    double pilotSal = 2 * 100 * (2 + ceil(d / speed));
+    double maintenance = 0.000025 * price * ceil(d / speed);
+    //cout << fuelCost<<" "<<ceil(d/speed)<<" "<<pilotSal<<" "<<maintenance<< endl;
+    return ceil(fuelCost + fSal + pilotSal + maintenance);
+  } //satisfy range
+  
+  return -1;
 }
 
-int Plane::getTrips(int total) const
+int Plane::getTrips(double total) const
 {
-  return ceil((double)total/passengers);
+  return ceil(total/passengers);
 }
 
-char* Plane::getName()
+const char* Plane::getName() const
 {
   return name;
 }
