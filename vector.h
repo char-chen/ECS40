@@ -2,7 +2,6 @@
   #define VECTOR_H
 
 #include "city.h"
-#include "plane.h"
 
 class Vector
 {
@@ -17,7 +16,7 @@ public:
   void readAirports();
   void cleanCities();
   int findAirport(const char *airport) const;
-  void calcDistance(int ind1, int ind2, const Plane *pArr, int pCount) const;
+  void calcDistance(int ind1, int ind2, int *dist, int *pass) const;
   void calcAirportTraffic(int index) const;
 }; //class Vector
 #endif

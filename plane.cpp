@@ -45,26 +45,27 @@ int Plane::getCost(double p, double d) const
   } //satisfy range
   
   return -1;
-}
+} //getCost
 
 int Plane::getTrips(double totalP) const
 {
-  return ceil(totalP/passengers);
-}
+  return ceil(totalP / passengers);
+} //getTrips
 
 const char* Plane::getName() const
 {
   return name;
-}
+} //getName
 
 ostream& operator<<(ostream& os, const Plane& rhs)
 {
   os << left << setw(12) << rhs.name << setw(6) << rhs.passengers << setw(6) 
      << rhs.range << setw(6) << rhs.speed << right << setw(6) << rhs.fuel 
      << setfill(' ') << setw(6) << fixed << setprecision(3) 
-     << (double)rhs.range/rhs.fuel << setfill(' ') << setw(6) << setprecision(2) 
-     <<(double)rhs.fuel*Plane::gallonPrice/rhs.range << setfill(' ') << setw(2)
-     << "$" << setfill(' ') << setw(5) << setprecision(1) << (double)rhs.price/1e6;
+     << (double)rhs.range / rhs.fuel << setfill(' ') << setw(6) 
+     << setprecision(2) << (double)rhs.fuel * Plane::gallonPrice / rhs.range 
+     << setfill(' ') << setw(2) << "$" << setfill(' ') << setw(5) 
+     << setprecision(1) << (double)rhs.price / 1e6;
   
   return os;
 } //Insertion operator 

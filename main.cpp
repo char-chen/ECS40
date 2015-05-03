@@ -107,7 +107,7 @@ void calcDistance(const Vector& v)
   cin.ignore(1000, '\n');
   int a1index = v.findAirport(a1);
   int a2index = v.findAirport(a2);
-  v.calcDistance(a1index, a2index, NULL, 0);
+  v.calcDistance(a1index, a2index, NULL, NULL);
 } //Dispaly distance and number of passengers between two airports
 
 void determineAirportTraffic(const Vector& v)
@@ -122,13 +122,14 @@ void determineAirportTraffic(const Vector& v)
 void displayPlaneInformation(const Plane *planes, int count)
 {
   cout << "\nPlane Information\n";
-  cout << left << setw(12) << "Name" << setw(6) << "Pass." << setw(6) << "Range" 
+  cout.imbue(locale(""));
+  cout << left << setw(12) << "Name" << setw(6) << "Pass." << setw(6) << "Range"
        << setw(6) << "Speed" << setw(6) << "Fuel" << " " << setw(5) << "MPG" 
        << " " << setw(5) << "$/mi" << " " << setw(12) << "Price * 10^6" << endl;
-  cout.imbue(locale("")); 
-
+  
   for (int i = 0; i < count; i++)
     cout << planes[i] << endl;
+
 } //Display information of all existing planes
 
 void addPlaneInformation(Plane *p, int& count)
@@ -136,7 +137,7 @@ void addPlaneInformation(Plane *p, int& count)
   p[count++].input();
 } //User-defined airplane
 
-void determineBestPlane(const Vector& v, const Plane *p, int count)
+void determineBestPlane(const Vector& v, const Plane *pArr, int count)
 {
   char a1[80], a2[80];
   cout << "\nPlease enter two airport abbreviations (XXX XXX): ";
@@ -144,8 +145,26 @@ void determineBestPlane(const Vector& v, const Plane *p, int count)
   cin.ignore(1000, '\n');
   int a1Index = v.findAirport(a1);
   int a2Index = v.findAirport(a2);
-  cout << setw(11) << left << "Passengers" << setw(7) << "Miles" << setw(6) << "Trips"
-       << setw(10) << "Name" << setw(7) << "Cost" << endl;
   cout.imbue(locale("C"));
-  v.calcDistance(a1Index, a2Index, p, count);
+  cout << setw(11) << left << "Passengers" << setw(7) << "Miles" << setw(6) 
+       << "Trips" << setw(10) << "Name" << setw(7) << "Cost" << endl;
+  int distance = 0;
+  int passengers = 0;
+  v.calcDistance(a1Index, a2Index, &distance, &passengers);
+  int lowestCost = 1e9, best;
+  
+  for (int i = 0; i < count; i++)
+  { 
+    int cost = pArr[i].getCost(passengers, distance);
+
+    if ( cost != -1 && cost < lowestCost)
+    {
+      lowestCost = cost;
+      best = i; 
+    } //if lower
+  } //for each plane in planeArray
+   
+  int t = pArr[best].getTrips((double)passengers);
+  cout << setw(6) << t << setw(10) << pArr[best].getName()
+  << "$" << setw(6) << lowestCost << endl;
 } //Determine the best plane for a given route 

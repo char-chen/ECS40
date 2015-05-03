@@ -19,5 +19,5 @@ public:
   int getTrips(double passengers) const;
   const char* getName() const;
   friend ostream& operator<<(ostream& os, const Plane& rhs);
-};
+}; //class Plane
 #endif
