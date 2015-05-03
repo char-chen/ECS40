@@ -17,20 +17,6 @@ void displayPlaneInformation(const Plane *planes, int count);
 void addPlaneInformation(Plane *planes, int &count);
 void determineBestPlane(const Vector& cities, const Plane *planes, int count);
 
-int main()
-{
-  Vector cities;
-  cities.readCities();
-  cities.readAirports();
-  cities.cleanCities();
-   
-  int planeCount = 0;
-  Plane myPlanes[10];
-  readPlanes(myPlanes, planeCount);
-  run(cities, myPlanes, planeCount);
-  return 0;
-}
-
 void readPlanes(Plane *planes, int &pCount)
 {
   ifstream planeFile("planes.dat", ios::binary);
@@ -145,14 +131,12 @@ void determineBestPlane(const Vector& v, const Plane *pArr, int count)
   cin.ignore(1000, '\n');
   int a1Index = v.findAirport(a1);
   int a2Index = v.findAirport(a2);
-  cout.imbue(locale("C"));
-  cout << setw(11) << left << "Passengers" << setw(7) << "Miles" << setw(6) 
-       << "Trips" << setw(10) << "Name" << setw(7) << "Cost" << endl;
   int distance = 0;
   int passengers = 0;
+  cout.imbue(locale("C"));
   v.calcDistance(a1Index, a2Index, &distance, &passengers);
   
-  if(passengers != 0)
+  if (passengers != 0)
   {
     int lowestCost = 1e9, best;
   
@@ -172,3 +156,17 @@ void determineBestPlane(const Vector& v, const Plane *pArr, int count)
     << "$" << setw(6) << lowestCost << endl;
   } //planes available
 } //Determine the best plane for a given route 
+
+int main()
+{
+  Vector cities;
+  cities.readCities();
+  cities.readAirports();
+  cities.cleanCities();
+   
+  int planeCount = 0;
+  Plane myPlanes[10];
+  readPlanes(myPlanes, planeCount);
+  run(cities, myPlanes, planeCount);
+  return 0;
+} //main

@@ -118,9 +118,13 @@ void Vector::calcDistance(int ind1, int ind2, int *d, int *p) const
       *p = cityArray[ind1].getPassengers(cityArray[ind2], *d);
       
       if (*p != 0)
-        cout << setw(11) << *p << setw(7) << *d;
+      {
+        cout << setw(11) << left << "Passengers" << setw(7) << "Miles" 
+             << setw(6) << "Trips" << setw(10) << "Name" << setw(7) << "Cost";
+        cout << endl << setw(11) << *p << setw(7) << *d;
+      } //has flights
       else //no flight
-        cout << "No planes available";
+        cout << "No planes available" << endl;
     } //to determine best plane
     else //calc
       cityArray[ind1].showDistance(cityArray[ind2]);
