@@ -116,11 +116,15 @@ void Vector::calcDistance(int ind1, int ind2, int *d, int *p) const
     {
       *d = cityArray[ind1].getDistance(cityArray[ind2]);
       *p = cityArray[ind1].getPassengers(cityArray[ind2], *d);
-      cout << setw(11) << *p << setw(7) << *d;
-    }
-    else //not plane option
+      
+      if (*p != 0)
+        cout << setw(11) << *p << setw(7) << *d;
+      else //no flight
+        cout << "No planes available";
+    } //to determine best plane
+    else //calc
       cityArray[ind1].showDistance(cityArray[ind2]);
-  }
+  } //if valid
 } //calcDistance
 
 void Vector::calcAirportTraffic(int index) const

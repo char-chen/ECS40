@@ -29,7 +29,7 @@ int main()
   readPlanes(myPlanes, planeCount);
   run(cities, myPlanes, planeCount);
   return 0;
-} //main
+}
 
 void readPlanes(Plane *planes, int &pCount)
 {
@@ -151,20 +151,24 @@ void determineBestPlane(const Vector& v, const Plane *pArr, int count)
   int distance = 0;
   int passengers = 0;
   v.calcDistance(a1Index, a2Index, &distance, &passengers);
-  int lowestCost = 1e9, best;
   
-  for (int i = 0; i < count; i++)
-  { 
-    int cost = pArr[i].getCost(passengers, distance);
+  if(passengers != 0)
+  {
+    int lowestCost = 1e9, best;
+  
+    for (int i = 0; i < count; i++)
+    { 
+      int cost = pArr[i].getCost(passengers, distance);
 
-    if ( cost != -1 && cost < lowestCost)
-    {
-      lowestCost = cost;
-      best = i; 
-    } //if lower
-  } //for each plane in planeArray
+      if ( cost != -1 && cost < lowestCost)
+      {
+        lowestCost = cost;
+        best = i; 
+      } //if lower
+    } //for each plane in planeArray
    
-  int t = pArr[best].getTrips((double)passengers);
-  cout << setw(6) << t << setw(10) << pArr[best].getName()
-  << "$" << setw(6) << lowestCost << endl;
+    int t = pArr[best].getTrips((double)passengers);
+    cout << setw(6) << t << setw(10) << pArr[best].getName()
+    << "$" << setw(6) << lowestCost << endl;
+  } //planes available
 } //Determine the best plane for a given route 
