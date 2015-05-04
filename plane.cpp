@@ -39,7 +39,7 @@ int Plane::getCost(double p, double d) const
     double hours = (d / speed);
     double fuelCost = d * (double)fuel / range * Plane::gallonPrice * trips;
     double fSal = ceil(passengers / 100.0) * 30 * ceil(2.0 + hours) * trips;
-    double pSal = 2 * 100 * (2 + hours) * trips;
+    double pSal = 2 * 100 * ceil((2 + hours)) * trips;
     double maintenance = 0.000025 * price * hours * trips;
     return ceil(fuelCost + fSal + pSal + maintenance);
   } //satisfy range

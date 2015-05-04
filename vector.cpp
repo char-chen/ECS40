@@ -108,7 +108,7 @@ int Vector::findAirport(const char *a) const
   return -1;
 } //findAirport
 
-void Vector::calcDistance(int ind1, int ind2, int *d, int *p) const
+void Vector::calcDistance(int ind1, int ind2, int *d, int *p, int count) const
 {
   if (ind1 != -1 && ind2 != -1)
   {
@@ -117,10 +117,10 @@ void Vector::calcDistance(int ind1, int ind2, int *d, int *p) const
       *d = cityArray[ind1].getDistance(cityArray[ind2]);
       *p = cityArray[ind1].getPassengers(cityArray[ind2], *d);
       
-      if (*p != 0)
+      if (*p != 0 && count > 0) 
       {
         cout << setw(11) << left << "Passengers" << setw(7) << "Miles" 
-             << setw(6) << "Trips" << setw(10) << "Name" << setw(7) << "Cost";
+             << setw(6) << "Trips" << setw(10) << "Name" << "Cost";
         cout << endl << setw(11) << *p << setw(7) << *d;
       } //has flights
       else //no flight
