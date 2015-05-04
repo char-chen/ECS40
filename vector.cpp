@@ -108,16 +108,19 @@ int Vector::findAirport(const char *a) const
   return -1;
 } //findAirport
 
-void Vector::calcDistance(int ind1, int ind2, int *d, int *p, int count) const
+void Vector::calcDistance(int id1, int id2, int *d, int *p, int c, int m) const
 {
-  if (ind1 != -1 && ind2 != -1)
+  if (id1 != -1 && id2 != -1)
   {
     if (d && p)
     {
-      *d = cityArray[ind1].getDistance(cityArray[ind2]);
-      *p = cityArray[ind1].getPassengers(cityArray[ind2], *d);
+      *d = cityArray[id1].getDistance(cityArray[id2]);
+      *p = cityArray[id1].getPassengers(cityArray[id2], *d);
       
-      if (*p != 0 && count > 0) 
+      if (*d > m)
+        *p = 0;
+      
+      if (*p != 0 && c > 0) 
       {
         cout << setw(11) << left << "Passengers" << setw(7) << "Miles" 
              << setw(6) << "Trips" << setw(10) << "Name" << "Cost";
@@ -127,7 +130,7 @@ void Vector::calcDistance(int ind1, int ind2, int *d, int *p, int count) const
         cout << "No planes available" << endl;
     } //to determine best plane
     else //calc
-      cityArray[ind1].showDistance(cityArray[ind2]);
+      cityArray[id1].showDistance(cityArray[id2]);
   } //if valid
 } //calcDistance
 

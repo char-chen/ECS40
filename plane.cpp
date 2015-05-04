@@ -11,7 +11,7 @@ void Plane::input()
   cin >> name;
   cout << "Passengers: ";
   cin >> passengers;
-  cout << "Fuel Capacity (in U.S. gallons): ";
+  cout << "Fuel capacity (in U.S. gallons): ";
   cin >> fuel;
   cout << "Range (in miles): ";
   cin >> range;
@@ -51,6 +51,11 @@ int Plane::getTrips(double totalP) const
 {
   return ceil(totalP / passengers);
 } //getTrips
+
+int Plane::getRange() const
+{
+  return range; 
+} //getMaxRange
 
 const char* Plane::getName() const
 {

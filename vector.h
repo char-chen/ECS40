@@ -16,7 +16,7 @@ public:
   void readAirports();
   void cleanCities();
   int findAirport(const char *airport) const;
-  void calcDistance(int ind1, int ind2, int *dist, int *pass, int p) const;
+  void calcDistance(int ind1, int ind2, int *d, int *pass, int p, int m) const;
   void calcAirportTraffic(int index) const;
 }; //class Vector
 #endif

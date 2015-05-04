@@ -92,7 +92,7 @@ void calcDistance(const Vector& v)
   cin >> a1 >> a2;
   int a1index = v.findAirport(a1);
   int a2index = v.findAirport(a2);
-  v.calcDistance(a1index, a2index, NULL, NULL, -1);
+  v.calcDistance(a1index, a2index, NULL, NULL, -1, -1);
 } //Dispaly distance and number of passengers between two airports
 
 void determineAirportTraffic(const Vector& v)
@@ -130,8 +130,14 @@ void determineBestPlane(const Vector& v, const Plane *pArr, int count)
   int a2Index = v.findAirport(a2);
   int distance = 0;
   int passengers = 0;
+  int maxRange = -1;
+  
+  for (int i = 0; i < count; i++)
+    if (pArr[i].getRange() > maxRange)
+      maxRange = pArr[i].getRange();
+
   cout.imbue(locale("C"));
-  v.calcDistance(a1Index, a2Index, &distance, &passengers, count);
+  v.calcDistance(a1Index, a2Index, &distance, &passengers, count, maxRange);
    
   if (passengers != 0 && count > 0)
   {
@@ -143,8 +149,7 @@ void determineBestPlane(const Vector& v, const Plane *pArr, int count)
 
       if ( cost != -1 && cost < lowestCost)
       {
-        lowestCost = cost;
-        best = i; 
+        lowestCost = cost; best = i; 
       } //if lower
     } //for each plane in planeArray
    

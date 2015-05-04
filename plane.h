@@ -17,6 +17,7 @@ public:
   void input();
   int getCost(double passengers, double distance) const;
   int getTrips(double passengers) const;
+  int getRange() const;
   const char* getName() const;
   friend ostream& operator<<(ostream& os, const Plane& rhs);
 }; //class Plane
