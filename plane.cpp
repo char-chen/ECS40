@@ -20,23 +20,25 @@ void Plane::input()
   cout << "Price: ";
   cin >> price;
   ofstream planeFile("planes.dat");
-  
+   
   if (planeFile.good())
-    planeFile.open("planes.dat", ios::binary | ios::app);
-  else //file not exist
-    planeFile.open("planes.dat", ios::binary);
+  {
+    planeFile.close();
+    planeFile.open("planes.dat", ios::app | ios::binary );
+    planeFile.write((char*)this, sizeof(Plane));
+  } //file exist
+  //else //file not exist
+    //planeFile.open("planes.dat", ios::binary);
 
-  planeFile.write((char*)this, sizeof(Plane));
-  planeFile.close(); 
+  planeFile.clear();
 } //input
 
 int Plane::getCost(double p, double d) const
 {
   if (d <= range)
   {
-    //cout << name << ceil(p / 100) << endl;
     int trips = this->getTrips(p);
-    double hours = (d / speed);
+    double hours = d / speed;
     double fuelCost = d * (double)fuel / range * Plane::gallonPrice * trips;
     double fSal = ceil(passengers / 100.0) * 30 * ceil(2.0 + hours) * trips;
     double pSal = 2 * 100 * ceil((2 + hours)) * trips;

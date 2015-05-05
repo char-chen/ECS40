@@ -160,12 +160,12 @@ void determineBestPlane(const Vector& v, const Plane *pArr, int count)
 } //Determine the best plane for a given route 
 
 int main()
-{
+{ 
   Vector cities;
   cities.readCities();
   cities.readAirports();
   cities.cleanCities();
-   
+    
   int planeCount = 0;
   Plane myPlanes[10];
   readPlanes(myPlanes, planeCount);
