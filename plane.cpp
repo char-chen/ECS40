@@ -19,18 +19,9 @@ void Plane::input()
   cin >> speed;
   cout << "Price: ";
   cin >> price;
-  ofstream planeFile("planes.dat");
-   
-  if (planeFile.good())
-  {
-    planeFile.close();
-    planeFile.open("planes.dat", ios::app | ios::binary );
-    planeFile.write((char*)this, sizeof(Plane));
-  } //file exist
-  //else //file not exist
-    //planeFile.open("planes.dat", ios::binary);
-
-  planeFile.clear();
+  ofstream planeFile("planes.dat", ios::app | ios::binary );
+  planeFile.write((char*)this, sizeof(Plane));
+  planeFile.close();
 } //input
 
 int Plane::getCost(double p, double d) const

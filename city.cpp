@@ -68,7 +68,7 @@ void City::copyLocation(const City& c)
   strcpy(airport, c.airport);
 } //copyLocation
 
-bool City::hasAirport()
+bool City::hasAirport() const
 {
   return airport[0] != '\0'; 
 } //hasAirport

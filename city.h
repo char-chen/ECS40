@@ -19,7 +19,7 @@ public:
   void readAirport(char *str, char *state);
   bool isEqual(const City& city) const;
   void copyLocation(const City& city);
-  bool hasAirport();
+  bool hasAirport() const;
   void setAirport(const char *airport);
   int getDistance(const City& city) const;
   int getPassengers(const City& city, int dist) const;
