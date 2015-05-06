@@ -13,9 +13,9 @@ void run(const Vector& cities, Plane *planes, int& pCount);
 int getChoice();
 void calcDistance(const Vector& cities);
 void determineAirportTraffic(const Vector& cities);
-void displayPlaneInformation(const Plane *planes, int count);
+void displayPlaneInformation(const Plane planes[10], int count);
 void addPlaneInformation(Plane *planes, int& count);
-void determineBestPlane(const Vector& cities, const Plane *p, int ct);
+void determineBestPlane(const Vector& cities, const Plane p[10], int ct);
 
 void readPlanes(Plane *planes, int& pCount)
 {
@@ -103,7 +103,7 @@ void determineAirportTraffic(const Vector& v)
   v.calcAirportTraffic(v.findAirport(airport));
 } //Display all traffic from airport
 
-void displayPlaneInformation(const Plane *planes, int count)
+void displayPlaneInformation(const Plane planes[10], int count)
 {
   cout << "\nPlane Information\n";
   cout.imbue(locale(""));
@@ -121,7 +121,7 @@ void addPlaneInformation(Plane *p, int& count)
   p[count++].input();
 } //User-defined airplane
 
-void determineBestPlane(const Vector& v, const Plane *pArr, int count)
+void determineBestPlane(const Vector& v, const Plane pArr[10], int count)
 {
   char a1[80], a2[80];
   cout << "\nPlease enter two airport abbreviations (XXX XXX): ";
