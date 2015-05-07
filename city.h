@@ -14,6 +14,7 @@ class City
   double population;
 public:
   City();
+  City(const City& rhs);
   ~City();
   int readCity(ifstream& file); //returns 0 if end of file
   void readAirport(char *str, char *state);

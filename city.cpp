@@ -16,6 +16,18 @@ City::City()
   airport[0] = '\0';
 } //City
 
+City::City(const City& rhs) : 
+  longitude(rhs.longitude), 
+  latitude(rhs.latitude),
+  population(rhs.population)
+{
+  name = new char[strlen(rhs.name) + 1];
+  strcpy(name, rhs.name);
+  state = new char[strlen(rhs.state) + 1];
+  strcpy(state, rhs.state);
+  strcpy(airport, rhs.airport);
+} 
+
 int City::readCity(ifstream& inf)
 {
   char line[100];
