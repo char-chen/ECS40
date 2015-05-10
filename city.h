@@ -1,24 +1,25 @@
 #ifndef CITY_H
   #define CITY_H
 
-#include <fstream>
+#include <iostream>
 using namespace std;
 
 class City
 {
+public:
   double longitude;
   double latitude;
-  char* name;
-  char* state;
+  char *name;
+  char *state;
   char airport[4];
   double population;
-public:
+//public:
   City();
   City(const City& rhs);
   ~City();
-  int readCity(ifstream& file); //returns 0 if end of file
+  friend istream& operator>>(istream& is, City& rhs);
   void readAirport(char *str, char *state);
-  bool isEqual(const City& city) const;
+  bool operator==(const City& city) const;
   void copyLocation(const City& city);
   bool hasAirport() const;
   void setAirport(const char *airport);

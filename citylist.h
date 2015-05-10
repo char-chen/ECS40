@@ -3,14 +3,14 @@
 
 #include "city.h"
 
-//class City;
+class City;
 class Plane;
 class CityList;
 
 class CityNode
 { 
   friend class CityList;
-  
+public:  
   City city;
   CityNode *next;
   CityNode(City c, CityNode *n);
@@ -19,17 +19,17 @@ class CityNode
 
 class CityList
 {
+public:
   CityNode *head;
   CityNode *tail;
   static int count;
-public:
+//public:
   CityList();
   ~CityList();
   static int getCount();
   CityList& operator+=(const City& rhs);
   CityList& operator-=(const City& rhs);
-  City operator[] (int index);
-  const City operator[] (int index) const;
-  
+  City& operator[](int index);
+  const City& operator[](int index) const;
 }; //class CityList
 #endif //CITYLIST_H

@@ -1,5 +1,5 @@
 #ifndef PLANE_H
-  #define	PLANE_H
+  #define PLANE_H
 
 #include <iostream>
 using namespace std;
@@ -14,7 +14,7 @@ class Plane
   int price;  //in US dollars
   static const double gallonPrice = 3.39;
 public:
-  void input();
+  void inputPlane();
   int getCost(double passengers, double distance) const;
   int getTrips(double passengers) const;
   int getRange() const;

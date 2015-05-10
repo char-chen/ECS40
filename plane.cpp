@@ -5,7 +5,7 @@
 #include "plane.h"
 using namespace std;
 
-void Plane::input()
+void Plane::inputPlane()
 {
   cout << "Name: ";
   cin >> name;

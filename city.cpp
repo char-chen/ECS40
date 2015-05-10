@@ -1,20 +1,16 @@
-#include <iostream>
-#include <fstream>
 #include <cstring>
 #include <cstdlib>
 #include <cmath>
 #include "city.h"
 using namespace std;
 
-City::City()
+City::City() : name(NULL), state(NULL)
 {
   longitude = -1;
   latitude = -1;
   population = -1;
-  name = NULL;
-  state = NULL;
   airport[0] = '\0';
-} //City
+} //City default constructor
 
 City::City(const City& rhs) : 
   longitude(rhs.longitude), 
@@ -25,29 +21,31 @@ City::City(const City& rhs) :
   strcpy(name, rhs.name);
   state = new char[strlen(rhs.state) + 1];
   strcpy(state, rhs.state);
+  airport[0] = '\0';
   strcpy(airport, rhs.airport);
-} 
+} //City copy constructor 
 
-int City::readCity(ifstream& inf)
+istream& operator>>(istream& is, City& rhs)
 {
-  char line[100];
+  char line[100], *token;
   
-  if (inf.getline(line, 100))
+  //if  (!is.getline(line, 100) || !strstr(line, ","))
+    //return;
+  is.getline(line, 100);
+  token = strtok(line, ",");
+  
+  if (token)
   {
-    char *token;
-    token = strtok(line, ",");
-    name = new char[strlen(token) + 1];
-    strcpy(name, token);
+    rhs.name = new char[strlen(token) + 1];
+    strcpy(rhs.name, token);
     token = strtok(NULL, ",");
-    state = new char[strlen(token) + 1];
-    strcpy(state, token);
-    token = strtok(NULL, "");
-    population = atof(token);
-    return 1; 
+    rhs.state = new char[strlen(token) + 1];
+    strcpy(rhs.state, token);
+    rhs.population = atof(strtok(NULL, ",\n"));
   } //parsing line
-  else //reach end of file
-    return 0; 
-} //readCity
+
+  return is;
+} //operator >>
 
 void City::readAirport(char *line, char *s)
 {
@@ -62,16 +60,16 @@ void City::readAirport(char *line, char *s)
   strcpy(state, s);
 } //readAirport
 
-bool City::isEqual(const City& c) const
+bool City::operator==(const City& rhs) const
 {
-  if (name && c.name)
-    return strcmp(name, c.name) == 0 && strcmp(state, c.state) == 0;
+  if (name && rhs.name)
+    return strcmp(name, rhs.name) == 0 && strcmp(state, rhs.state) == 0;
   
-  if (airport[0] && c.airport[0])
-    return strcmp(airport, c.airport) == 0;
+  if (airport[0] && rhs.airport[0])
+    return strcmp(airport, rhs.airport) == 0;
   
   return false;
-} //isEqual
+} //operator ==
 
 void City::copyLocation(const City& c)
 {
@@ -108,15 +106,15 @@ int City::getPassengers(const City& c, int dist) const
     return (population * c.population) / 2500000000U;
 } //getPassengers
 
-void City::showDistance(const City& c) const
+void City::showDistance(const City& rhs) const
 {
   int distance, passengers;
-  distance = this->getDistance(c);
-  passengers = this->getPassengers(c, distance);
+  distance = this->getDistance(rhs);
+  passengers = this->getPassengers(rhs, distance);
   
-  cout << passengers << " passengers fly the " << distance << " miles from\n"
-    << name << ", " << state << " to " << c.name << ", " << c.state << ".\n";
-} //showDistance
+  cout << passengers << " passengers fly the " << distance << " miles from\n" 
+  << name << ", " << state << " to " << rhs.name << ", " << rhs.state << ".\n";
+} //operator -
 
 int City::showTraffic(const City& c) const
 {
@@ -153,4 +151,4 @@ City& City::operator=(const City& rhs)
   latitude = rhs.latitude;
   population = rhs.population;  
   return *this;
-} //Copy assignment operator
+} //operator =
