@@ -183,12 +183,13 @@ void readCities(CityList& cities)
 {
   ifstream cityFile("citypopulations.csv");
   
-  while (!cityFile.eof() && CityList::getCount() < 261)
+  while (!cityFile.eof())
   {
     City temp;
     cityFile >> temp;
-    cities += temp;
-    //cout << cities[CityList::getCount()-1].name<<endl;
+  
+    if (cityFile)
+      cities += temp;
   } //parsing
   
   cityFile.close();     

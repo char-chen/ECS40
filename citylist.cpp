@@ -53,9 +53,12 @@ CityList& CityList::operator-=(const City& rhs)
       head = ptr->next;
     else //later node 
       prev->next = ptr->next;
+    
+    if (tail == ptr)
+      tail = prev;
       
     delete ptr;
-  } //remove
+  } //remove city
   
   CityList::count--;
   return *this;
@@ -65,9 +68,8 @@ City& CityList::operator[](int index)
 {
   CityNode *ptr = head;
   
-  for (int i = 0; ptr && i < index; i++)
-    ptr = ptr->next;
-  
+  for (int i = 0; ptr && i < index; i++, ptr = ptr->next);
+   
   return ptr->city;
 } //opeartor[]
   
@@ -75,8 +77,7 @@ const City& CityList::operator[](int index) const
 {
   CityNode *ptr = head;
   
-  for (int i = 0; ptr && i < index; i++)
-    ptr = ptr->next;
+  for (int i = 0; ptr && i < index; i++, ptr = ptr->next);
   
   return ptr->city;  
 } //const operator[] const

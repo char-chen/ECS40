@@ -6,14 +6,13 @@ using namespace std;
 
 class City
 {
-public:
   double longitude;
   double latitude;
   char *name;
   char *state;
   char airport[4];
   double population;
-//public:
+public:
   City();
   City(const City& rhs);
   ~City();

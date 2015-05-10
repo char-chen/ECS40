@@ -10,7 +10,7 @@ class CityList;
 class CityNode
 { 
   friend class CityList;
-public:  
+  
   City city;
   CityNode *next;
   CityNode(City c, CityNode *n);
@@ -19,11 +19,10 @@ public:
 
 class CityList
 {
-public:
   CityNode *head;
   CityNode *tail;
   static int count;
-//public:
+public:
   CityList();
   ~CityList();
   static int getCount();
