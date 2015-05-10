@@ -3,8 +3,6 @@
 
 #include "city.h"
 
-class City;
-class Plane;
 class CityList;
 
 class CityNode
