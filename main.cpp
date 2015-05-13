@@ -24,20 +24,6 @@ void calcDistance(const CityList& cities, int id1, int id2, int *d, int *p,
                   int c, int m);
 void calcAirportTraffic(const CityList& cities, int index);
 
-int main()
-{
-  CityList cities;
-  readCities(cities);
-  readAirports(cities);
-  cleanCities(cities);
-  
-  int planeCount = 0;
-  Plane myPlanes[10];
-  readPlanes(myPlanes, planeCount);
-  run(cities, myPlanes, planeCount);
-  return 0;
-} //main
-
 void readPlanes(Plane *planes, int& pCount)
 {
   ifstream planeFile("planes.dat", ios::binary);
@@ -124,7 +110,7 @@ void determineAirportTraffic(const CityList& v)
   calcAirportTraffic(v, findAirport(v, airport));
 } //Display all traffic from airport
 
-void displayPlaneInformation(const Plane planes[10], int count)
+void displayPlaneInformation(const Plane planes[10], int pCount)
 {
   cout << "\nPlane Information\n";
   cout.imbue(locale(""));
@@ -132,16 +118,16 @@ void displayPlaneInformation(const Plane planes[10], int count)
        << setw(6) << "Speed" << setw(6) << "Fuel" << " " << setw(5) << "MPG" 
        << " " << setw(5) << "$/mi" << " " << setw(12) << "Price * 10^6" << endl;
   
-  for (int i = 0; i < count; i++)
+  for (int i = 0; i < pCount; i++)
     cout << planes[i] << endl;
 } //Display information of all existing planes
 
-void addPlaneInformation(Plane *p, int& count)
+void addPlaneInformation(Plane *p, int& pCount)
 {
-  p[count++].inputPlane();
+  p[pCount++].inputPlane();
 } //User-defined airplane
 
-void determineBestPlane(const CityList& v, const Plane pArr[10], int count)
+void determineBestPlane(const CityList& v, const Plane pArr[10], int pCount)
 {
   char a1[80], a2[80];
   cout << "\nPlease enter two airport abbreviations (XXX XXX): ";
@@ -151,18 +137,18 @@ void determineBestPlane(const CityList& v, const Plane pArr[10], int count)
   int distance = 0, passengers = 0;
   int maxRange = -1;
   
-  for (int i = 0; i < count; i++)
+  for (int i = 0; i < pCount; i++)
     if (pArr[i].getRange() > maxRange)
       maxRange = pArr[i].getRange();
 
   cout.imbue(locale("C"));
-  calcDistance(v, a1Index, a2Index, &distance, &passengers, count, maxRange);
+  calcDistance(v, a1Index, a2Index, &distance, &passengers, pCount, maxRange);
   
-  if (passengers != 0 && count > 0)
+  if (passengers != 0 && pCount > 0)
   {
     int lowestCost = 1e9, best;
   
-    for (int i = 0; i < count; i++)
+    for (int i = 0; i < pCount; i++)
     { 
       int cost = pArr[i].getCost(passengers, distance);
 
@@ -284,10 +270,24 @@ void calcAirportTraffic(const CityList& cities, int index)
 
   if (index != -1)
   {
-    for (int i = 0; i < CityList::getCount(); i++)
+    for (int i = 0; i < CityList::getCount(); i++) 
       if (i != index)
         total += cities[i].showTraffic(cities[index]);
     
     cout << "Total passengers: " << total << endl;  
   } //valid index returned from Vector::findAirport() 
 } //calcAirportTraffic
+
+int main()
+{
+  CityList cities;
+  readCities(cities);
+  readAirports(cities);
+  cleanCities(cities);
+  
+  int planeCount = 0;
+  Plane myPlanes[10];
+  readPlanes(myPlanes, planeCount);
+  run(cities, myPlanes, planeCount);
+  return 0;
+} //main

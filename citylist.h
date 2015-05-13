@@ -11,7 +11,7 @@ class CityNode
   
   City city;
   CityNode *next;
-  CityNode(City c, CityNode *n);
+  CityNode(const City c, CityNode *n);
   ~CityNode(); 
 }; //class CityNode
 

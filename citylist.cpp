@@ -1,6 +1,6 @@
 #include "citylist.h"
 
-CityNode::CityNode(City c, CityNode *n) : city(c), next(n)
+CityNode::CityNode(const City c, CityNode *n) : city(c), next(n)
 { 
 } //CityNode
 
