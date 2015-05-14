@@ -9,7 +9,7 @@ template<typename T>
 int List<T>::count = 0;
 
 template<typename T>
-List<T>::List() : head(NULL), tail(NULL)
+List<T>::List() : head(NULL)
 {
 } //Citylist
 
@@ -30,13 +30,24 @@ int List<T>::getCount()
 } //static getCount()
 
 template<typename T>
+bool List<T>::operator<(const T& rhs) const
+{
+  return this->data < rhs; 
+} //operator<
+
+template<typename T>
 List<T>& List<T>::operator+=(const T& rhs)
 {
-  if (!head)
-    tail = head = new ListNode<T>(rhs, NULL);
+  ListNode<T> *ptr, *prev = NULL;
+  
+  for (ptr = head; ptr && ptr->data < rhs; ptr = ptr->next)
+    prev = ptr;
+  
+  if (!prev)
+    head = new ListNode<T>(rhs, head);
   else //list not empty
-    tail = tail->next = new ListNode<T>(rhs, NULL); 
-
+    prev->next = new ListNode<T>(rhs, ptr);
+   
   List<T>::count++;
   return *this;
 } //operator+=
@@ -49,16 +60,13 @@ List<T>& List<T>::operator-=(const T& rhs)
   for (ptr = head; ptr && !(ptr->data == rhs) ; ptr = ptr->next)
     prev = ptr;
   
-  if (ptr && ptr->data == rhs)
+  if (ptr)
   {
     if (!prev)
       head = ptr->next;
-    else //later node 
+    else //list not empty 
       prev->next = ptr->next;
     
-    if (tail == ptr)
-      tail = prev;
-      
     delete ptr;
   } //remove data
   

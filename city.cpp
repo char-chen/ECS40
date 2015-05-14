@@ -71,6 +71,11 @@ bool City::operator==(const City& rhs) const
   return false;
 } //operator ==
 
+bool City::operator<(const City& rhs) const
+{
+  return population < rhs.population;
+}
+
 void City::copyLocation(const City& c)
 {
   latitude = c.latitude;

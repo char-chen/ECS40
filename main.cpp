@@ -4,25 +4,26 @@
 #include <fstream>
 #include <cstring>
 #include <cstdlib>
-#include "citylist.h"
+#include "list.h"
+#include "city.h"
 #include "plane.h"
 using namespace std;
 
 void readPlanes(Plane *planes, int& pCount);
-void run(const CityList& cities, Plane *planes, int& pCount);
+void run(const List<City>& cities, Plane *planes, int& pCount);
 int getChoice();
-void calcDistance(const CityList& cities);
-void determineAirportTraffic(const CityList& cities);
+void calcDistance(const List<City>& cities);
+void determineAirportTraffic(const List<City>& cities);
 void displayPlaneInformation(const Plane planes[10], int ct);
 void addPlaneInformation(Plane *planes, int& ct);
-void determineBestPlane(const CityList& cities, const Plane p[10], int ct);
-void readCities(CityList& cities);
-void readAirports(CityList& cities);
-void cleanCities(CityList& cities);
-int findAirport(const CityList& cities, const char *a);
-void calcDistance(const CityList& cities, int id1, int id2, int *d, int *p, 
+void determineBestPlane(const List<City>& cities, const Plane p[10], int ct);
+void readCities(List<City>& cities);
+void readAirports(List<City>& cities);
+void cleanCities(List<City>& cities);
+int findAirport(const List<City>& cities, const char *a);
+void calcDistance(const List<City>& cities, int id1, int id2, int *d, int *p, 
                   int c, int m);
-void calcAirportTraffic(const CityList& cities, int index);
+void calcAirportTraffic(const List<City>& cities, int index);
 
 void readPlanes(Plane *planes, int& pCount)
 {
@@ -41,7 +42,7 @@ void readPlanes(Plane *planes, int& pCount)
   } //file exists
 } //readPlanes
 
-void run(const CityList& cities, Plane *planes, int& c)
+void run(const List<City>& cities, Plane *planes, int& c)
 {
   while(true)
   {
@@ -92,7 +93,7 @@ int getChoice()
   return input;
 } //returns -1 if not valid
 
-void calcDistance(const CityList& v)
+void calcDistance(const List<City>& v)
 {
   char a1[80], a2[80];
   cout << "\nPlease enter two airport abbreviations (XXX XXX): "; 
@@ -102,7 +103,7 @@ void calcDistance(const CityList& v)
   calcDistance(v, a1index, a2index, NULL, NULL, -1, -1);
 } //Dispaly distance and number of passengers between two airports
 
-void determineAirportTraffic(const CityList& v)
+void determineAirportTraffic(const List<City>& v)
 {
   char airport[80];
   cout << "\nPlease enter an airport abbreviation (XXX): ";
@@ -127,7 +128,7 @@ void addPlaneInformation(Plane *p, int& pCount)
   p[pCount++].inputPlane();
 } //User-defined airplane
 
-void determineBestPlane(const CityList& v, const Plane pArr[10], int pCount)
+void determineBestPlane(const List<City>& v, const Plane pArr[10], int pCount)
 {
   char a1[80], a2[80];
   cout << "\nPlease enter two airport abbreviations (XXX XXX): ";
@@ -165,7 +166,7 @@ void determineBestPlane(const CityList& v, const Plane pArr[10], int pCount)
   } //planes available
 } //Determine the best plane for a given route 
 
-void readCities(CityList& cities)
+void readCities(List<City>& cities)
 {
   ifstream cityFile("citypopulations.csv");
   
@@ -181,7 +182,7 @@ void readCities(CityList& cities)
   cityFile.close();     
 } //readCities
 
-void readAirports(CityList& cities)
+void readAirports(List<City>& cities)
 {
   ifstream airportFile("airportLL.txt");
   char line[50];
@@ -204,21 +205,21 @@ void readAirports(CityList& cities)
       City test;
       test.readAirport(line, state);
       
-      for (int i = 0; i < CityList::getCount(); i++)
+      for (int i = 0; i < List<City>::getCount(); i++)
         if (test == cities[i])
           cities[i].copyLocation(test);
     } //airport line
   } //parsing each line in file 
 } //readAirports
 
-void cleanCities(CityList& cities)
+void cleanCities(List<City>& cities)
 {
-  for (int i = 0; i < CityList::getCount(); i++)
+  for (int i = 0; i < List<City>::getCount(); i++)
     if (!cities[i].hasAirport())
         cities -= cities[i--];
 } //cleanCities
 
-int findAirport(const CityList& cities, const char *a)
+int findAirport(const List<City>& cities, const char *a)
 {
   if (strlen(a) != 3)
   {
@@ -229,7 +230,7 @@ int findAirport(const CityList& cities, const char *a)
   City temp;
   temp.setAirport(a);
   
-  for (int i = 0; i < CityList::getCount() ; i++)
+  for (int i = 0; i < List<City>::getCount() ; i++)
     if (temp == cities[i])
       return i;
  
@@ -237,7 +238,7 @@ int findAirport(const CityList& cities, const char *a)
   return -1;
 } //findAirport
 
-void calcDistance(const CityList& cities, int id1, int id2, int *d, int *p, 
+void calcDistance(const List<City>& cities, int id1, int id2, int *d, int *p, 
                   int c, int m)
 {
   if (id1 != -1 && id2 != -1)
@@ -264,13 +265,13 @@ void calcDistance(const CityList& cities, int id1, int id2, int *d, int *p,
   } //if valid
 } //calcDistance
 
-void calcAirportTraffic(const CityList& cities, int index)
+void calcAirportTraffic(const List<City>& cities, int index)
 {
   int total = 0;
 
   if (index != -1)
   {
-    for (int i = 0; i < CityList::getCount(); i++) 
+    for (int i = 0; i < List<City>::getCount(); i++) 
       if (i != index)
         total += cities[i].showTraffic(cities[index]);
     
@@ -280,7 +281,7 @@ void calcAirportTraffic(const CityList& cities, int index)
 
 int main()
 {
-  CityList cities;
+  List<City> cities;
   readCities(cities);
   readAirports(cities);
   cleanCities(cities);

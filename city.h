@@ -19,6 +19,7 @@ public:
   friend istream& operator>>(istream& is, City& rhs);
   void readAirport(char *str, char *state);
   bool operator==(const City& city) const;
+  bool operator<(const City& city) const;
   void copyLocation(const City& city);
   bool hasAirport() const;
   void setAirport(const char *airport);
