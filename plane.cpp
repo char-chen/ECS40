@@ -1,5 +1,6 @@
 #include <iomanip>
 #include <fstream>
+#include <cstring>
 #include <cmath>
 #include "plane.h"
 using namespace std;
@@ -53,6 +54,11 @@ const char* Plane::getName() const
 {
   return name;
 } //getName
+
+bool Plane::operator<(const Plane& rhs) const
+{
+  return strcmp(name, rhs.name) < 0;
+} //operator<
 
 ostream& operator<<(ostream& os, const Plane& rhs)
 {

@@ -19,6 +19,7 @@ public:
   int getTrips(double passengers) const;
   int getRange() const;
   const char* getName() const;
+  bool operator<(const Plane& rhs) const;
   friend ostream& operator<<(ostream& os, const Plane& rhs);
 }; //class Plane
 #endif

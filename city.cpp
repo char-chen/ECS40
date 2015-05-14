@@ -29,9 +29,9 @@ istream& operator>>(istream& is, City& rhs)
 {
   char line[100], *token;
   
-  //if  (!is.getline(line, 100) || !strstr(line, ","))
-    //return;
-  is.getline(line, 100);
+  if  (!is.getline(line, 100) || !strstr(line, ","))
+    return is;
+  
   token = strtok(line, ",");
   
   if (token)

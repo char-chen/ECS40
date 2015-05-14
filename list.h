@@ -22,7 +22,6 @@ public:
   List<T> ();
   ~List<T> ();
   static int getCount();
-  bool operator<(const T& rhs) const;
   List<T>& operator+=(const T& rhs);
   List<T>& operator-=(const T& rhs);
   T& operator[](int index);

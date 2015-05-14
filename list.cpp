@@ -30,12 +30,6 @@ int List<T>::getCount()
 } //static getCount()
 
 template<typename T>
-bool List<T>::operator<(const T& rhs) const
-{
-  return this->data < rhs; 
-} //operator<
-
-template<typename T>
 List<T>& List<T>::operator+=(const T& rhs)
 {
   ListNode<T> *ptr, *prev = NULL;
