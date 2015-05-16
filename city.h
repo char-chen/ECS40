@@ -6,6 +6,7 @@ using namespace std;
 
 class City
 {
+protected:
   double longitude;
   double latitude;
   char *name;

@@ -58,7 +58,7 @@ const char* Plane::getName() const
 bool Plane::operator<(const Plane& rhs) const
 {
   return strcmp(name, rhs.name) < 0;
-} //operator<
+} //operator <
 
 ostream& operator<<(ostream& os, const Plane& rhs)
 {

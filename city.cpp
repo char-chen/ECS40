@@ -74,7 +74,7 @@ bool City::operator==(const City& rhs) const
 bool City::operator<(const City& rhs) const
 {
   return population < rhs.population;
-}
+} //operator <
 
 void City::copyLocation(const City& c)
 {

@@ -1,15 +1,10 @@
-#include "list.h"
-
 template<typename T>
 ListNode<T>::ListNode(const T d, ListNode<T> *n) : data(d), next(n)
 { 
 } //ListNode<T>
 
 template<typename T>
-int List<T>::count = 0;
-
-template<typename T>
-List<T>::List() : head(NULL)
+List<T>::List() : head(NULL), count(0)
 {
 } //Citylist
 
@@ -24,10 +19,10 @@ List<T>::~List()
 } //~List<T>
 
 template<typename T>
-int List<T>::getCount()
+int List<T>::getCount() const
 {
-  return List<T>::count;
-} //static getCount()
+  return count;
+} //getCount
 
 template<typename T>
 List<T>& List<T>::operator+=(const T& rhs)
@@ -42,9 +37,9 @@ List<T>& List<T>::operator+=(const T& rhs)
   else //list not empty
     prev->next = new ListNode<T>(rhs, ptr);
    
-  List<T>::count++;
+  count++;
   return *this;
-} //operator+=
+} //operator +=
 
 template<typename T>
 List<T>& List<T>::operator-=(const T& rhs)
@@ -64,9 +59,9 @@ List<T>& List<T>::operator-=(const T& rhs)
     delete ptr;
   } //remove data
   
-  List<T>::count--;
+  count--;
   return *this;
-} //operator-=
+} //operator -=
 
 template<typename T>
 T& List<T>::operator[](int index)
@@ -76,7 +71,7 @@ T& List<T>::operator[](int index)
   for (int i = 0; ptr && i < index; i++, ptr = ptr->next);
    
   return ptr->data;
-} //opeartor[]
+} //opeartor []
 
 template<typename T>  
 const T& List<T>::operator[](int index) const
@@ -86,4 +81,4 @@ const T& List<T>::operator[](int index) const
   for (int i = 0; ptr && i < index; i++, ptr = ptr->next);
   
   return ptr->data;  
-} //const operator[] const
+} //const operator [] const
