@@ -82,3 +82,12 @@ const T& List<T>::operator[](int index) const
   
   return ptr->data;  
 } //const operator [] const
+
+template<typename T>
+ostream& operator<<(ostream& os, const List<T>& rhs)
+{
+  for (int i = 0; i < rhs.getCount(); i++)
+    os << rhs[i] << '\n';
+
+  return os;
+} //operator <<

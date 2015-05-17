@@ -17,6 +17,7 @@ void determineAirportTraffic(const List<Airport>& cities);
 void displayPlaneInformation(const List<Plane>& planes);
 void addPlaneInformation(List<Plane>& planes);
 void determineBestPlane(const List<Airport>& cities, const List<Plane>& planes);
+void determineRoute(const List<Airport>& cities, const List<Plane>& planes);
 void readCities(List<Airport>& cities);
 void readAirports(List<Airport>& cities);
 void cleanCities(List<Airport>& cities);
@@ -36,8 +37,8 @@ void readPlanes(List<Plane>& planes)
     {
       Plane temp;
       planeFile.read((char*)&temp, sizeof(Plane));
-      
-      if (planeFile) 
+
+      if (planeFile)
         planes += temp;
     } //parse linee
   } //file exists
@@ -67,7 +68,10 @@ void run(const List<Airport>& cities, List<Plane>& planes)
         determineBestPlane(cities, planes);
     else //input = 6
       if (choice == 6)
-        ;//determineRoute(cities, planes);
+        cout << cities;
+    else //input = 7
+      if (choice == 7)
+        determineRoute(cities, planes);
     else //input not valid
       if (choice == -1)
         continue;
@@ -86,13 +90,13 @@ int getChoice()
   cout << "3. Display planes information.\n";
   cout << "4. Add plane information.\n";
   cout << "5. Determine best plane between two airports.\n";
-  cout << "6. Show airline flights.";
-  cout << "7. Determine route between two airports.";
-  cout << "\nYour choice (0 - 5): ";
+  cout << "6. Show airline flights.\n";
+  cout << "7. Determine route between two airports.\n";
+  cout << "\nYour choice (0 - 7): ";
   cin >> input;
   cin.ignore(10000, '\n');
 
-  if (input > 6 || input < 0)
+  if (input > 7 || input < 0)
   {
     cout << "Your choice must be between 0 and 2. Please try again." << endl;
     return -1;
@@ -175,6 +179,11 @@ void determineBestPlane(const List<Airport>& cities, const List<Plane>& planes)
     << "$" << lowestCost << endl;
   } //planes available
 } //Determine the best plane for a given route 
+
+void determineRoute(const List<Airport>& cities, const List<Plane>& planes)
+{
+
+} //determineRoute
 
 void readCities(List<Airport>& cities)
 {
@@ -290,28 +299,67 @@ void calcAirportTraffic(const List<Airport>& cities, int index)
 void readAirlines(List<Airport>& cities, char *file)
 {
   ifstream airlineFile(file);
-  char airport[4];
-  
+   
   if (airlineFile)
   { 
     for (int i = 0; i < 10; i++)
-      airlineFile.ignore(1000, '\n'); //skip 10 lines
+      airlineFile.ignore(100, '\n'); //skip 10 lines
   
     Airport temp;
+    char origin[4];
     
     while (!airlineFile.eof())
     {
-      airlineFile >> airport;
-      temp.setAirport(airport);
-       
+      airlineFile >> origin;
+      temp.setAirport(origin);
+      
       for (int i = 0; i < cities.getCount(); i++)
         if (cities[i] == temp)
-           cities[i].readFlights(airlineFile);
+          cities[i].readFlights(airlineFile);
     }
   }
   
   airlineFile.close();
 } //readAirlines
+
+void Airport::readFlights(ifstream& inf)
+{
+  int num = 0;
+  inf >> num;
+  
+  for (int i = 0; i < num; i++)
+  {
+    Flight flight;
+    char airline[10];
+    inf >> airline >> flight.destAirport;
+    strncpy(flight.airline, airline, 2);
+    flight.airline[2] = '\0';
+    flights += flight;
+  } //parsing
+  
+  inf.ignore(1000, '\n');
+} //readFlights
+
+ostream& operator<<(ostream& os, const Airport& rhs)
+{
+  os << rhs.airport << ": ";
+  
+  for (int i = 0; i < rhs.flights.getCount(); i++)
+    os << rhs.flights[i];
+
+  return os; 
+} //operator <<
+
+bool Flight::operator<(const Flight& rhs) const
+{
+  return false; 
+} //operator <
+
+ostream& operator<<(ostream& os, const Flight& rhs)
+{
+  os << rhs.airline << "-" << rhs.destAirport << " ";
+  return os; 
+} //operator <<
 
 int main(int argc, char *argv[])
 {

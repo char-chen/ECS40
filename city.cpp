@@ -62,7 +62,7 @@ void City::readAirport(char *line, char *s)
 
 bool City::operator==(const City& rhs) const
 {
-  if (name && rhs.name)
+  if (name && rhs.name && state && rhs.state)
     return strcmp(name, rhs.name) == 0 && strcmp(state, rhs.state) == 0;
   
   if (airport[0] && rhs.airport[0])

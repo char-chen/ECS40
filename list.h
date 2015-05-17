@@ -1,8 +1,14 @@
 #ifndef LIST_H
   #define LIST_H
 
+#include <iostream>
+using namespace std;
+
 template<typename T>
 class List;
+
+template<typename T>
+ostream& operator<<(ostream& os, const List<T>& rhs);
 
 template<typename T>
 class ListNode
@@ -26,6 +32,9 @@ public:
   List<T>& operator-=(const T& rhs);
   T& operator[](int index);
   const T& operator[](int index) const;
+
+  template<typename R> 
+  friend ostream& operator<<(ostream& os, const List<R>& rhs);
 }; //class List
 #include "list.cpp"
 #endif
