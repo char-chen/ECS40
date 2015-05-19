@@ -1,16 +1,25 @@
 template<typename T>
-ListNode<T>::ListNode(const T d, ListNode<T> *n) : data(d), next(n)
-{ 
+ListNode<T>::ListNode(const T& d, ListNode<T> *n) : data(d), next(n)
+{
+   
 } //ListNode<T>
 
 template<typename T>
 List<T>::List() : head(NULL), count(0)
 {
-} //Citylist
+  
+} //List<T> constructor
+
+template<typename T>
+List<T>::List(const List<T>& rhs)
+{
+  for (int i = 0; i < rhs.getCount(); i++)
+    *this += rhs[i];
+} //List<T> copy constructor
 
 template<typename T>
 List<T>::~List()
-{
+{ 
   for (ListNode<T> *ptr = head; ptr; ptr = head)
   {
     head = ptr->next;

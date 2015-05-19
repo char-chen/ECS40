@@ -15,7 +15,7 @@ class ListNode
 { 
   T data;
   ListNode<T> *next;
-  ListNode<T> (const T d, ListNode<T> *n);
+  ListNode<T> (const T& d, ListNode<T> *n);
   friend class List<T>; 
 }; //class ListNode
 
@@ -25,8 +25,9 @@ class List
   ListNode<T> *head;
   int count;
 public:
-  List<T> ();
-  ~List<T> ();
+  List<T>();
+  List<T>(const List<T>& orig);
+  ~List<T>();
   int getCount() const;
   List<T>& operator+=(const T& rhs);
   List<T>& operator-=(const T& rhs);

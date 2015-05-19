@@ -17,7 +17,7 @@ void determineAirportTraffic(const List<Airport>& cities);
 void displayPlaneInformation(const List<Plane>& planes);
 void addPlaneInformation(List<Plane>& planes);
 void determineBestPlane(const List<Airport>& cities, const List<Plane>& planes);
-void determineRoute(const List<Airport>& cities, const List<Plane>& planes);
+void determineRoute(const List<Airport>& cities);
 void readCities(List<Airport>& cities);
 void readAirports(List<Airport>& cities);
 void cleanCities(List<Airport>& cities);
@@ -71,7 +71,7 @@ void run(const List<Airport>& cities, List<Plane>& planes)
         cout << cities;
     else //input = 7
       if (choice == 7)
-        determineRoute(cities, planes);
+        determineRoute(cities);
     else //input not valid
       if (choice == -1)
         continue;
@@ -129,10 +129,8 @@ void displayPlaneInformation(const List<Plane>& planes)
   cout.imbue(locale(""));
   cout << left << setw(12) << "Name" << setw(6) << "Pass." << setw(6) << "Range"
        << setw(6) << "Speed" << setw(6) << "Fuel" << " " << setw(5) << "MPG" 
-       << " " << setw(5) << "$/mi" << " " << setw(12) << "Price * 10^6" << endl;
-  
-  for (int i = 0; i < planes.getCount(); i++)
-    cout << planes[i] << endl;
+       << " " << setw(5) << "$/mi" << " " << setw(12) << "Price * 10^6" << endl; 
+  cout << planes;
 } //Display information of all existing planes
 
 void addPlaneInformation(List<Plane>& planes)
@@ -152,18 +150,18 @@ void determineBestPlane(const List<Airport>& cities, const List<Plane>& planes)
   int dist = 0, pass = 0;
   int maxRange = -1;
   
-  for (int i = 0; i < cities.getCount(); i++)
+  for (int i = 0; i < planes.getCount(); i++)
     if (planes[i].getRange() > maxRange)
       maxRange = planes[i].getRange();
 
   cout.imbue(locale("C"));
-  calcDistance(cities, i1, i2, &dist, &pass, cities.getCount(), maxRange);
-  
-  if (pass != 0 && cities.getCount() > 0)
+  calcDistance(cities, i1, i2, &dist, &pass, planes.getCount(), maxRange);
+   
+  if (pass != 0 && planes.getCount() > 0)
   {
     int lowestCost = 1e9, best;
   
-    for (int i = 0; i < cities.getCount(); i++)
+    for (int i = 0; i < planes.getCount(); i++)
     { 
       int cost = planes[i].getCost(pass, dist);
 
@@ -180,9 +178,22 @@ void determineBestPlane(const List<Airport>& cities, const List<Plane>& planes)
   } //planes available
 } //Determine the best plane for a given route 
 
-void determineRoute(const List<Airport>& cities, const List<Plane>& planes)
+void determineRoute(const List<Airport>& cities)
 {
-
+  char airport1[4], airport2[4], airline[10];
+  cout << "Please enter origin destination and an airline: ";
+  cin >> airport1 >> airport2 >> airline;
+  Airport origin, destination;
+  origin.setAirport(airport1);
+  destination.setAirport(airport2);
+  
+  List<Flight> results;
+  origin.findRoute(destination, cities, results, airline);
+  
+  if (results.getCount() == 0) 
+    cout << "No route found." << endl;
+  else
+    cout << results; 
 } //determineRoute
 
 void readCities(List<Airport>& cities)
@@ -316,8 +327,8 @@ void readAirlines(List<Airport>& cities, char *file)
       for (int i = 0; i < cities.getCount(); i++)
         if (cities[i] == temp)
           cities[i].readFlights(airlineFile);
-    }
-  }
+    } //parsing
+  } //if file exists
   
   airlineFile.close();
 } //readAirlines
@@ -339,6 +350,26 @@ void Airport::readFlights(ifstream& inf)
   
   inf.ignore(1000, '\n');
 } //readFlights
+
+void Airport::findRoute(const Airport& dest, const List<Airport>& cities, List<Flight>& results, char* airline) const
+{
+  int i, j;
+  
+  for (i = 0; i < cities.getCount(); i++)
+    if (cities[i] == *this)
+      break;
+  
+  for (j = 0; j < cities[i].flights.getCount(); i++)
+  {
+    if (strcmp(cities[i].flights[j].destAirport, dest.airport) == 0) 
+      return;
+    else
+      if (strcmp(cities[i].flights[j].airline, airline) == 0)
+        cities[i].findRoute(dest, cities, results, airline);
+  }
+    
+  results += cities[i].flights[j];
+} //findRoute
 
 ostream& operator<<(ostream& os, const Airport& rhs)
 {
@@ -369,9 +400,9 @@ int main(int argc, char *argv[])
   cleanCities(cities);
   readAirlines(cities, argv[1]);
    
-  List<Plane> myPlanes;
-  readPlanes(myPlanes);
+  List<Plane> planes;
+  readPlanes(planes);
   
-  run(cities, myPlanes);
+  run(cities, planes);
   return 0;
 } //main

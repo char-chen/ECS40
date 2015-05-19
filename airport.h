@@ -16,7 +16,8 @@ class Flight
   char destAirport[4];
 public: 
   bool operator<(const Flight& rhs) const;
-  friend ostream& operator<<(ostream& os, const Flight& rhs); 
+  friend ostream& operator<<(ostream& os, const Flight& rhs);
+  bool operator==(const Flight& rhs) const;
 }; //class Flight
 
 class Airport : public City
@@ -24,6 +25,7 @@ class Airport : public City
   List<Flight> flights;
 public:
   void readFlights(ifstream& file);
-  friend ostream& operator<<(ostream& os, const Airport& rhs); 
+  friend ostream& operator<<(ostream& os, const Airport& rhs);
+  void findRoute(const Airport& dest, const List<Airport>& cities, List<Flight>& flights, char *airine) const;
 }; //class Airport
 #endif 
