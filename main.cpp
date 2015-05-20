@@ -25,7 +25,7 @@ int findAirport(const List<Airport>& cities, const char *a);
 void calcDistance(const List<Airport>& cities, int id1, int id2, int *d, int *p,
                   int c, int m);
 void calcAirportTraffic(const List<Airport>& cities, int index);
-void readAirlines(List<Airport>& cities, char *airlineFile);
+void readAirlines(List<Airport>& cities, const char *airlineFile);
 
 void readPlanes(List<Plane>& planes)
 {
@@ -129,7 +129,7 @@ void displayPlaneInformation(const List<Plane>& planes)
   cout.imbue(locale(""));
   cout << left << setw(12) << "Name" << setw(6) << "Pass." << setw(6) << "Range"
        << setw(6) << "Speed" << setw(6) << "Fuel" << " " << setw(5) << "MPG" 
-       << " " << setw(5) << "$/mi" << " " << setw(12) << "Price * 10^6" << endl; 
+       << " " << setw(5) << "$/mi" << " " << setw(12) << "Price * 10^6\n";
   cout << planes;
 } //Display information of all existing planes
 
@@ -181,19 +181,28 @@ void determineBestPlane(const List<Airport>& cities, const List<Plane>& planes)
 void determineRoute(const List<Airport>& cities)
 {
   char airport1[4], airport2[4], airline[10];
-  cout << "Please enter origin destination and an airline: ";
+  cout << "\nPlease enter origin destination and an airline: ";
   cin >> airport1 >> airport2 >> airline;
+  airline[2] = '\0';
   Airport origin, destination;
   origin.setAirport(airport1);
   destination.setAirport(airport2);
   
   List<Flight> results;
-  origin.findRoute(destination, cities, results, airline);
+  bool found = false;
+  origin.findRoute(destination, cities, results, airline, found);
+   
+  if (found)
+  {
+    cout << airline << "-" << airport1 << " ";
+    
+    for (int i = 0; i < results.getCount(); i++)
+      cout << results[i];
+  } //success
+  else //dest not found 
+    cout << "No route found.";
   
-  if (results.getCount() == 0) 
-    cout << "No route found." << endl;
-  else
-    cout << results; 
+  cout << endl;
 } //determineRoute
 
 void readCities(List<Airport>& cities)
@@ -307,7 +316,7 @@ void calcAirportTraffic(const List<Airport>& cities, int index)
   } //valid index returned from Vector::findAirport() 
 } //calcAirportTraffic
 
-void readAirlines(List<Airport>& cities, char *file)
+void readAirlines(List<Airport>& cities, const char *file)
 {
   ifstream airlineFile(file);
    
@@ -332,65 +341,6 @@ void readAirlines(List<Airport>& cities, char *file)
   
   airlineFile.close();
 } //readAirlines
-
-void Airport::readFlights(ifstream& inf)
-{
-  int num = 0;
-  inf >> num;
-  
-  for (int i = 0; i < num; i++)
-  {
-    Flight flight;
-    char airline[10];
-    inf >> airline >> flight.destAirport;
-    strncpy(flight.airline, airline, 2);
-    flight.airline[2] = '\0';
-    flights += flight;
-  } //parsing
-  
-  inf.ignore(1000, '\n');
-} //readFlights
-
-void Airport::findRoute(const Airport& dest, const List<Airport>& cities, List<Flight>& results, char* airline) const
-{
-  int i, j;
-  
-  for (i = 0; i < cities.getCount(); i++)
-    if (cities[i] == *this)
-      break;
-  
-  for (j = 0; j < cities[i].flights.getCount(); i++)
-  {
-    if (strcmp(cities[i].flights[j].destAirport, dest.airport) == 0) 
-      return;
-    else
-      if (strcmp(cities[i].flights[j].airline, airline) == 0)
-        cities[i].findRoute(dest, cities, results, airline);
-  }
-    
-  results += cities[i].flights[j];
-} //findRoute
-
-ostream& operator<<(ostream& os, const Airport& rhs)
-{
-  os << rhs.airport << ": ";
-  
-  for (int i = 0; i < rhs.flights.getCount(); i++)
-    os << rhs.flights[i];
-
-  return os; 
-} //operator <<
-
-bool Flight::operator<(const Flight& rhs) const
-{
-  return false; 
-} //operator <
-
-ostream& operator<<(ostream& os, const Flight& rhs)
-{
-  os << rhs.airline << "-" << rhs.destAirport << " ";
-  return os; 
-} //operator <<
 
 int main(int argc, char *argv[])
 {

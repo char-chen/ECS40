@@ -14,18 +14,18 @@ class Flight
   friend class Airport;
   char airline[3];
   char destAirport[4];
-public: 
+public:
   bool operator<(const Flight& rhs) const;
   friend ostream& operator<<(ostream& os, const Flight& rhs);
-  bool operator==(const Flight& rhs) const;
 }; //class Flight
 
 class Airport : public City
 {
-  List<Flight> flights;
+  List<Flight> routes;
 public:
   void readFlights(ifstream& file);
   friend ostream& operator<<(ostream& os, const Airport& rhs);
-  void findRoute(const Airport& dest, const List<Airport>& cities, List<Flight>& flights, char *airine) const;
+  void findRoute(const Airport& dest, const List<Airport>& cities, 
+                 List<Flight>& flights, const char *airline, bool& found) const;
 }; //class Airport
 #endif 
