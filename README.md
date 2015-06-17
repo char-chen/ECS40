@@ -6,6 +6,7 @@ A program that reads a source file, edits the file based on a second file contai
 commands, and then saves the resulting text to a third file.
 
 Commands
+
 There is exactly one space between each element in a command line.
 {char} indicates a string of zero or more chars of any length, with spaces allowed.
 Line numbers start at zero. The line number of specific text can change during the editing process because of line
