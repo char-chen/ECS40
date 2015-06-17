@@ -128,7 +128,7 @@ void unscramble(const set<Word>& wordBank, const CVmap& m, ifstream& sbfile)
 
     cout << endl;
   } //check combinations
-} //scrabble
+} //unscramble
 
 void getSubstrings(string target, set<string>& substrs)
 {
@@ -157,4 +157,4 @@ void getSubstrings(string target, set<string>& substrs)
     if (wildcard)
       target.at(target.size() - 1) = ++wildcard;
   } while (wildcard && wildcard <= 'z');
-} //getSubstring
+} //getSubstrings

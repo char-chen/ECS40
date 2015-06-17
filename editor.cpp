@@ -161,4 +161,4 @@ void save(const vector<string>& v, ofstream& outf)
     outf << *itr;
 
   outf.close();
-} //save text
+} //save

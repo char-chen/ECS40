@@ -8,7 +8,7 @@ template<typename T>
 List<T>::List() : head(NULL), count(0)
 {
   
-} //List<T> constructor
+} //List<T>
 
 template<typename T>
 List<T>::List(const List<T>& rhs)
