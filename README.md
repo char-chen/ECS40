@@ -1,7 +1,7 @@
-# FlightSim
+# 1.FlightSim
 An airline route simulator.
 
-# Editor 
+# 2.Editor 
 A program that reads a source file, edits the file based on a second file containing
 commands, and then saves the resulting text to a third file.
 
@@ -35,7 +35,7 @@ Operation: removes the specified string from the entire text. If this matches an
 line should be removed.
 
 Copy and paste
-Syntax: C <<start_line#> <end_line#> <destination_line#>
+Syntax: C <start_line#> <end_line#> <destination_line#>
 Operation: Copies the specified lines and pastes them starting at the destination line number.
 
 Move
@@ -43,6 +43,6 @@ Syntax: M <start_line#> <end_line#> <destination_line#>
 2.10.2. Operation: Cuts the specified lines and pastes them starting at the destination line number. The
 destination line number is based on the original vector before the lines are cut
 
-#3 Scrabble
+# 3.Scrabble
 A program that reads a file of scrambled 7-letter strings, and then prints out the highest valued
 legal Scrabble word(s).
